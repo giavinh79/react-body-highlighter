@@ -1,7 +1,7 @@
 import 'react-app-polyfill/ie11';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import Model from '../dist/index';
+import Model from 'react-body-highlighter';
 
 const App = () => {
   return (
