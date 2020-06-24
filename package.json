@@ -33,6 +33,25 @@
   },
   "name": "react-body-highlighter",
   "author": "GV79",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GV79/react-body-highlighter"
+  },
+  "homepage": "https://github.com/GV79/react-body-highlighter",
+  "keywords": [
+    "react",
+    "muscle",
+    "muscles",
+    "body",
+    "model",
+    "highlighter",
+    "highlight",
+    "color",
+    "svg",
+    "fitness",
+    "exercise",
+    "workout"
+  ],
   "module": "dist/react-body-highlighter.esm.js",
   "devDependencies": {
     "@types/react": "^16.9.41",

@@ -1,8 +1,7 @@
-# react-body-highlighter
+# [react-body-highlighter](https://www.npmjs.com/package/react-body-highlighter)
 
 [![Npm Version][npm-version-image]][npm-version-url]
 [![License][license-image]][license-url]
-[![Downloads][downloads-image]][downloads-url]
 
 I created this package to have a body highlighter component compatible with React.js with minimal dependencies and some extra props for further functionality. The SVG polygons were leveraged from the React Native package [react-native-body-highlighter](https://github.com/HichamELBSI/react-native-body-highlighter).
 
@@ -65,3 +64,8 @@ gluteal
 head
 neck
 ```
+
+[license-image]: http://img.shields.io/npm/l/react-body-highlighter.svg
+[license-url]: LICENSE
+[npm-version-image]: https://img.shields.io/npm/v/react-body-highlighter.svg
+[npm-version-url]: https://www.npmjs.com/package/react-body-highlighter
