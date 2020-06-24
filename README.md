@@ -1,4 +1,4 @@
-# react-native-body-highlighter
+# react-body-highlighter
 
 [![Npm Version][npm-version-image]][npm-version-url]
 [![License][license-image]][license-url]
