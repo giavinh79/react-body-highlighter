@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Svg, Polygon } from './styles';
 import { CSSProperties } from 'react';
 

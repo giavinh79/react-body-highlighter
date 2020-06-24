@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "react-app-polyfill": "^1.0.0",
-    "react-body-highlighter": "^1.0.1"
+    "react-body-highlighter": "^1.0.2"
   },
   "alias": {
     "react": "../node_modules/react",
