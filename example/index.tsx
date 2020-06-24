@@ -1,7 +1,8 @@
 import 'react-app-polyfill/ie11';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import Model from '../src/index';
+import Model from '../dist/index';
+import ModelTest from '../src/index';
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         ]}
         onClick={(exercise: object) => alert(JSON.stringify(exercise))}
       />
+      <ModelTest />
     </div>
   );
 };

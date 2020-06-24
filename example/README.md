@@ -1,6 +1,6 @@
 # react-body-highlighter example
 
-Small repo for testing component module.
+Small repo for testing published component module.
 
 1. Installing
 
