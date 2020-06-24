@@ -41,7 +41,7 @@ All props are optional so if they are not passed to the component, they will fal
 | Prop              | Purpose                                                                                     | Type             | Default                  |
 | ----------------- | ------------------------------------------------------------------------------------------- | ---------------- | -----------------------  |
 | bodyColor         | Default color of unworked body muscle                                                       | String           | `#B6BDC3`                |
-| data              | Data array containing exercise JSON objects: `{ name: 'Bicep Curl', muscles: ['biceps']) }` | Object[]         |                          |
+| data              | Data array containing exercise JSON objects: `{ name: 'Bicep Curl', muscles: ['biceps'] }` | Object[]         |                          |
 | highlightedColors | Defaults to `['#0984e3', '#74b9ff']`                                                        | []               | `['#0984e3', '#74b9ff']` |
 | hoverColor        | Color shown when a user hovers over unworked muscle                                         | String           | `#757782`                |
 | onClick           | Callback when muscle is clicked (passes JSON object of the muscle, exercises & frequency)   | (exercise) => {} |                          |
