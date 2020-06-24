@@ -55,6 +55,7 @@ const Model: React.FC<Props> = ({
   responsive = true,
   scale,
   style,
+  svgStyle,
   type = 'anterior',
 }) => {
   const modelTypeData = type === 'posterior' ? posteriorData : anteriorData;
@@ -80,13 +81,14 @@ const Model: React.FC<Props> = ({
   };
 
   return (
-    <div style={style}>
+    <div style={{ width: 'auto', ...style }}>
       <Svg
         width="100%"
         height="100%"
         viewBox="0 0 100 200"
         responsive={responsive}
         transform={scale ? `scale(${scale})` : undefined}
+        style={svgStyle}
       >
         {modelTypeData.map(exercise =>
           exercise.pointsArray.map((points, index) => (

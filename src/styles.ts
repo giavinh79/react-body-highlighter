@@ -14,7 +14,7 @@ interface PolygonProps {
 /* Styled Components */
 
 export const Svg = styled.svg<SvgProps>`
-  width: ${({ responsive }) => (responsive ? '100%' : 'auto')};
+  width: ${({ responsive }) => (responsive ? '100%' : '210px')};
   height: auto;
 `;
 
