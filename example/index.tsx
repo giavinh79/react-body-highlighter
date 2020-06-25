@@ -1,14 +1,14 @@
 import 'react-app-polyfill/ie11';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import Model from '../src/index';
+import Model from 'react-body-highlighter';
 
 const data = [
   { name: 'Bench Press', muscles: ['chest', 'triceps', 'front-deltoids'] },
   { name: 'Tricep Pushdown', muscles: ['triceps'] },
 ];
 
-const handleClick = (exercise: any) => {
+const handleClick = exercise => {
   const {
     muscle,
     stats: { exercises, frequency },
@@ -23,21 +23,7 @@ const handleClick = (exercise: any) => {
 const App = () => {
   return (
     <div style={styles.container}>
-      <Model
-        data={[
-          {
-            name: 'Bench Press',
-            muscles: ['chest', 'triceps', 'front-deltoids'],
-            frequency: 4,
-          },
-          {
-            name: 'Lat Pulldown',
-            muscles: ['upper-back'],
-          },
-          { name: 'Tricep Pushdown', muscles: ['triceps'] },
-        ]}
-        onClick={handleClick}
-      />
+      <Model data={data} onClick={handleClick} />
       <Model type="posterior" data={data} highlightedColors={['#e65a5a', '#db2f2f']} onClick={handleClick} />
     </div>
   );

@@ -25,6 +25,11 @@ export interface MuscleData {
   frequency: number;
 }
 
+export interface MuscleStats {
+  muscle: string;
+  stats: MuscleData;
+}
+
 /* Types for data passed to component */
 export type DataExercise = Data[] | null | undefined;
 export interface Data {
@@ -97,10 +102,7 @@ const Model: React.FC<Props> = ({
     }
   }
 
-  const handleClickCallback = (
-    muscle: string,
-    handleMuscleClick?: (data?: { muscle: string; stats: MuscleData }) => any
-  ) => {
+  const handleClickCallback = (muscle: string, handleMuscleClick?: (data: MuscleStats) => void) => {
     if (handleMuscleClick == null || muscle == null) {
       return undefined;
     } else {
