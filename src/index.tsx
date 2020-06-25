@@ -21,35 +21,16 @@ export interface Props {
 
 /* Types for handleClick callback */
 export interface MuscleData {
-  exercises: MuscleTypes[];
+  exercises: string[];
   frequency: number;
 }
-export type MuscleTypes =
-  | 'trapezius'
-  | 'upper-back'
-  | 'lower-back'
-  | 'chest'
-  | 'biceps'
-  | 'triceps'
-  | 'forearm'
-  | 'back-deltoids'
-  | 'front-deltoids'
-  | 'abs'
-  | 'obliques'
-  | 'abductor'
-  | 'hamstring'
-  | 'quadriceps'
-  | 'abductors'
-  | 'calves'
-  | 'gluteal'
-  | 'head'
-  | 'neck';
 
 /* Types for data passed to component */
 export type DataExercise = Data[] | null | undefined;
 export interface Data {
   name: string;
-  muscles: MuscleTypes[];
+  muscles: string[];
+  frequency?: number;
 }
 
 /* Utility function for determining muscle color */
@@ -70,29 +51,6 @@ const fillIntensityColor = (
   }
 };
 
-/* Object of supported muscles */
-const activityMap: { [name: string]: MuscleData } = {
-  trapezius: { exercises: [], frequency: 0 },
-  'upper-back': { exercises: [], frequency: 0 },
-  'lower-back': { exercises: [], frequency: 0 },
-  chest: { exercises: [], frequency: 0 },
-  biceps: { exercises: [], frequency: 0 },
-  triceps: { exercises: [], frequency: 0 },
-  forearm: { exercises: [], frequency: 0 },
-  'back-deltoids': { exercises: [], frequency: 0 },
-  'front-deltoids': { exercises: [], frequency: 0 },
-  abs: { exercises: [], frequency: 0 },
-  obliques: { exercises: [], frequency: 0 },
-  adductor: { exercises: [], frequency: 0 },
-  hamstring: { exercises: [], frequency: 0 },
-  quadriceps: { exercises: [], frequency: 0 },
-  abductors: { exercises: [], frequency: 0 },
-  calves: { exercises: [], frequency: 0 },
-  gluteal: { exercises: [], frequency: 0 },
-  head: { exercises: [], frequency: 0 },
-  neck: { exercises: [], frequency: 0 },
-};
-
 const Model: React.FC<Props> = ({
   bodyColor = '#B6BDC3',
   data,
@@ -107,11 +65,34 @@ const Model: React.FC<Props> = ({
 }) => {
   const modelTypeData = type === 'posterior' ? posteriorData : anteriorData;
 
+  /* Object of supported muscles */
+  const activityMap: { [name: string]: MuscleData } = {
+    trapezius: { exercises: [], frequency: 0 },
+    'upper-back': { exercises: [], frequency: 0 },
+    'lower-back': { exercises: [], frequency: 0 },
+    chest: { exercises: [], frequency: 0 },
+    biceps: { exercises: [], frequency: 0 },
+    triceps: { exercises: [], frequency: 0 },
+    forearm: { exercises: [], frequency: 0 },
+    'back-deltoids': { exercises: [], frequency: 0 },
+    'front-deltoids': { exercises: [], frequency: 0 },
+    abs: { exercises: [], frequency: 0 },
+    obliques: { exercises: [], frequency: 0 },
+    adductor: { exercises: [], frequency: 0 },
+    hamstring: { exercises: [], frequency: 0 },
+    quadriceps: { exercises: [], frequency: 0 },
+    abductors: { exercises: [], frequency: 0 },
+    calves: { exercises: [], frequency: 0 },
+    gluteal: { exercises: [], frequency: 0 },
+    head: { exercises: [], frequency: 0 },
+    neck: { exercises: [], frequency: 0 },
+  };
+
   if (data) {
     for (let exercise of data) {
       for (let muscle of exercise.muscles) {
-        activityMap[muscle].exercises = [...activityMap[muscle].exercises, exercise.name as MuscleTypes];
-        activityMap[muscle].frequency += 1;
+        activityMap[muscle].exercises = [...activityMap[muscle].exercises, exercise.name];
+        activityMap[muscle].frequency += exercise.frequency || 1;
       }
     }
   }
@@ -156,4 +137,4 @@ const Model: React.FC<Props> = ({
   );
 };
 
-export default React.memo(Model);
+export default Model;
