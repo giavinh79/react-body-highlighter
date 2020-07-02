@@ -52,7 +52,7 @@ All props are optional so if they are not passed to the component, they will fal
 | scale             | Manually scaling SVG through it's transform property                                        | Float            | `1`                      |
 | style             | CSSProperties style object that gets passed to SVG's parent container (div)                 | Object           |                          |
 | svgStyle          | CSSProperties style object that gets passed to SVG element                                  | Object           |                          |
-| type              | Denotes type of model (anterior/front view vs. posterior/back view)                         | String           | `anterior`               |
+| type              | Denotes type of model view (values: 'anterior' or 'posterior')                              | String           | `anterior`               |
 
 ## List of muscles/parts supported
 
