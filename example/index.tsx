@@ -1,7 +1,7 @@
 import 'react-app-polyfill/ie11';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import Model from 'react-body-highlighter';
+import Model from '../src/index';
 
 const data = [
   { name: 'Bench Press', muscles: ['chest', 'triceps', 'front-deltoids'] },

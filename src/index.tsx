@@ -91,6 +91,9 @@ const Model: React.FC<Props> = ({
     gluteal: { exercises: [], frequency: 0 },
     head: { exercises: [], frequency: 0 },
     neck: { exercises: [], frequency: 0 },
+    knees: { exercises: [], frequency: 0 },
+    'left-soleus': { exercises: [], frequency: 0 },
+    'right-soleus': { exercises: [], frequency: 0 },
   };
 
   if (data) {
