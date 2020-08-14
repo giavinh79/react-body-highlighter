@@ -33,6 +33,7 @@
   },
   "name": "react-body-highlighter",
   "author": "GV79",
+  "description": "React.js component for highlighting muscles on a body model",
   "repository": {
     "type": "git",
     "url": "https://github.com/GV79/react-body-highlighter"
@@ -54,15 +55,15 @@
   ],
   "module": "dist/react-body-highlighter.esm.js",
   "devDependencies": {
-    "@types/react": "^16.9.41",
+    "@types/react": "^16.9.46",
     "@types/react-dom": "^16.9.8",
-    "@types/styled-components": "^5.1.0",
+    "@types/styled-components": "^5.1.2",
     "husky": "^4.2.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "styled-components": "^5.1.1",
     "tsdx": "^0.13.2",
-    "tslib": "^2.0.0",
-    "typescript": "^3.9.5"
+    "tslib": "^2.0.1",
+    "typescript": "^3.9.7"
   }
 }
