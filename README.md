@@ -35,7 +35,7 @@ export default function Component() {
 }
 ```
 
-**Example**: https://codesandbox.io/s/magical-kowalevski-rzw9d?file=/src/App.tsx
+**Example**: https://codesandbox.io/s/condescending-leaf-qsp4m?file=/src/App.tsx
 
 ## Props
 
