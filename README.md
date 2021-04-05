@@ -4,7 +4,7 @@
 [![License][license-image]][license-url]
 [![Downloads][downloads-image]][downloads-url]
 
-> I created this package to have a body highlighter component compatible with React.js with minimal dependencies and some extra props for further functionality. The SVG polygons were leveraged from the React Native package [react-native-body-highlighter](https://github.com/HichamELBSI/react-native-body-highlighter).
+This package was created to have a body highlighter component compatible with React.js with minimal dependencies and some extra props for further functionality. The SVG polygons were leveraged from the React Native package [react-native-body-highlighter](https://github.com/HichamELBSI/react-native-body-highlighter).
 
 <p align="center">
   <img width="260" src="https://github.com/GV79/react-body-highlighter/blob/master/image/anterior-example.png" alt="React Body Highlighter">
@@ -14,6 +14,10 @@
 
 ```sh
 $ npm install react-body-highlighter
+```
+
+```sh
+$ yarn add react-body-highlighter
 ```
 
 ## Usage
