@@ -8,8 +8,10 @@ Small repo for testing local component module before publishing. After a success
 $ npm install
 ```
 
-2. Testing
+2. Starting
 
 ```sh
 $ npm start
 ```
+
+3. Go to `localhost:1234` to begin testing
