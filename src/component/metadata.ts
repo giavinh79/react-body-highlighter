@@ -54,9 +54,8 @@ export interface IModelProps {
   bodyColor?: string;
   data?: IExerciseData[];
   highlightedColors?: string[];
-  hoverColor?: string;
   onClick?: (exercise?: IMuscleStats) => void;
-  scale?: number | null;
   style?: CSSProperties;
+  svgStyle?: CSSProperties;
   type?: ModelType;
 }

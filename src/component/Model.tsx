@@ -1,16 +1,16 @@
 import * as React from 'react';
 
 import { ModelType, Muscle, IExerciseData, IModelProps, IMuscleData, IMuscleStats } from './metadata';
-import { Polygon } from './styles';
 
 import { anteriorData, posteriorData } from '../assets';
-import {
-  DEFAULT_MUSCLE_DATA,
-  DEFAULT_BODY_COLOR,
-  DEFAULT_HIGHLIGHTED_COLORS,
-  DEFAULT_HOVER_COLOR,
-  DEFAULT_MODEL_TYPE,
-} from '../constants';
+import { DEFAULT_MUSCLE_DATA, DEFAULT_BODY_COLOR, DEFAULT_HIGHLIGHTED_COLORS, DEFAULT_MODEL_TYPE } from '../constants';
+
+/*
+ * Utility function for choosing backup value if first value is undefined
+ */
+const ensure = (value: string | undefined, backupValue: string): string => {
+  return value == null ? backupValue : value;
+};
 
 /**
  * Function which determines color of muscle based on how often it has been exercised
@@ -42,7 +42,7 @@ const fillMuscleData = (data: IExerciseData[]): Record<Muscle, IMuscleData> => {
 
       return acc;
     },
-    { ...DEFAULT_MUSCLE_DATA }
+    { ...JSON.parse(JSON.stringify(DEFAULT_MUSCLE_DATA)) }
   );
 };
 
@@ -68,42 +68,44 @@ export default function Model({
   data = [],
   bodyColor = DEFAULT_BODY_COLOR,
   highlightedColors = DEFAULT_HIGHLIGHTED_COLORS,
-  hoverColor = DEFAULT_HOVER_COLOR,
   onClick,
+  svgStyle,
   style,
   type = DEFAULT_MODEL_TYPE,
 }: IModelProps) {
   const muscleData = React.useRef<Record<Muscle, IMuscleData>>(fillMuscleData([...data]));
+
+  const modelData = type === ModelType.ANTERIOR ? anteriorData : posteriorData;
 
   const handleClick = (muscle: Muscle, callback?: (data: IMuscleStats) => void) => {
     callback && callback({ muscle, data: muscleData.current[muscle] });
   };
 
   return (
-    <svg
-      width="100%"
-      height="100%"
-      viewBox="0 0 100 200"
-      style={{
-        width: '100%',
-        height: 'auto',
-        ...style,
-      }}
-    >
-      {(type === ModelType.POSTERIOR ? posteriorData : anteriorData).map(exercise =>
-        exercise.svgPoints.map((points, index) => (
-          <Polygon
-            key={index}
-            points={points}
-            style={{
-              fill: fillIntensityColor(muscleData.current, highlightedColors, exercise.muscle),
-            }}
-            onClick={() => handleClick(exercise.muscle, onClick)}
-            bodyColor={bodyColor}
-            hoverColor={hoverColor}
-          />
-        ))
-      )}
-    </svg>
+    <div style={style} className="rbh-wrapper">
+      <svg
+        className="rbh"
+        width="100%"
+        height="100%"
+        viewBox="0 0 100 200"
+        style={{
+          ...svgStyle,
+        }}
+      >
+        {modelData.map(exercise =>
+          exercise.svgPoints.map((points, index) => (
+            <polygon
+              key={index}
+              points={points}
+              onClick={() => handleClick(exercise.muscle, onClick)}
+              style={{
+                cursor: 'pointer',
+                fill: ensure(fillIntensityColor(muscleData.current, highlightedColors, exercise.muscle), bodyColor),
+              }}
+            />
+          ))
+        )}
+      </svg>
+    </div>
   );
 }

@@ -90,6 +90,12 @@ head
 neck
 ```
 
+## Modifying
+
+The main SVG element has a class name `.rbh` which will allow you to manually change any styles necessary.
+
+For example, you can add something like `.rhb polygon:hover { fill: #757782 !important; }` to your `.css` file to change the muscle color on mouse hover.
+
 [license-image]: http://img.shields.io/npm/l/react-body-highlighter.svg
 [license-url]: LICENSE
 [downloads-image]: http://img.shields.io/npm/dm/react-body-highlighter.svg
