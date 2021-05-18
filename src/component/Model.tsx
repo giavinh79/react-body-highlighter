@@ -52,9 +52,9 @@ const fillMuscleData = (data: IExerciseData[]): Record<Muscle, IMuscleData> => {
  * @param data Array containing exercise objects
  * @param bodyColor Default color of body model (with no muscles worked)
  * @param highlightedColors Array containing colors to display depending on frequency muscle is worked (where array index = frequency - 1)
- * @param hoverColor Color shown when a user hovers their mouse over a muscle on the model
  * @param onClick Callback function when a muscle is clicked (returns back object with muscle-related data)
- * @param style Style object that gets passed to SVG element
+ * @param svgStyle Style object that gets passed to SVG element
+ * @param style Style object that gets passed to SVG parent wrapper (div)
  * @param type Denotes type of model (default anterior view vs posterior view)
  *
  * @component
