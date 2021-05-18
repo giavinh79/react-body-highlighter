@@ -52,11 +52,9 @@ All props are optional so if they are not passed to the component, they will fal
 | highlightedColors | Array containing colors to display depending on frequency a muscle was worked (array[frequency-1] = color). For an example of how this works, see the CodeSandbox example above in the *Usage* section.                                                                 | []               | `['#0984e3', '#74b9ff']` |
 | hoverColor        | Color shown when a user hovers over an unworked muscle                                      | String           | `#757782`                |
 | onClick           | Callback when muscle is clicked. The function will get passed a JSON object of the following structure: `{ muscle: 'name', stats: { exercises: [''], frequency: 0 } }`                                                                                                 | (exercise) => {} |                         |
-| responsive        | Whether SVG automatically resizes w/ parent container                                       | Boolean          | `true`                   |
-| scale             | Manually scaling SVG through its transform property                                         | Float            | `1`                      |
 | style             | CSSProperties style object that gets passed to SVG's parent container (div)                 | Object           |                          |
 | svgStyle          | CSSProperties style object that gets passed to SVG element                                  | Object           |                          |
-| type              | Denotes type of model view (values: 'anterior' or 'posterior')                              | String           | `anterior`               |
+| type              | Denotes type of model view (values: `anterior` or `posterior`)                              | String           | `anterior`               |
 
 ## List of muscles/parts supported
 
@@ -92,6 +90,12 @@ gluteal
 head
 neck
 ```
+
+## Modifying
+
+The main SVG element has a class name `.rbh` which will allow you to manually change any styles necessary.
+
+For example, you can add something like `.rhb polygon:hover { fill: #757782 !important; }` to your `.css` file to change the muscle color on mouse hover.
 
 [license-image]: http://img.shields.io/npm/l/react-body-highlighter.svg
 [license-url]: LICENSE
