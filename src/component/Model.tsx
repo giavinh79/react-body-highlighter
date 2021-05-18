@@ -1,18 +1,24 @@
 import * as React from 'react';
 
-import { EModel, EMuscle, EMuscleType, IExerciseData, IModelProps, IMuscleData, IMuscleStats } from './metadata';
+import { ModelType, Muscle, IExerciseData, IModelProps, IMuscleData, IMuscleStats } from './metadata';
+import { Polygon } from './styles';
 
-import { anteriorData, posteriorData, } from '../assets';
-import { Svg, Polygon } from './styles';
-import { DEFAULT_MUSCLE_DATA, DEFAULT_BODY_COLOR, DEFAULT_HIGHLIGHTED_COLORS, DEFAULT_HOVER_COLOR, DEFAULT_MODEL_TYPE } from '../constants';
+import { anteriorData, posteriorData } from '../assets';
+import {
+  DEFAULT_MUSCLE_DATA,
+  DEFAULT_BODY_COLOR,
+  DEFAULT_HIGHLIGHTED_COLORS,
+  DEFAULT_HOVER_COLOR,
+  DEFAULT_MODEL_TYPE,
+} from '../constants';
 
 /**
  * Function which determines color of muscle based on how often it has been exercised
  */
 const fillIntensityColor = (
-  activityMap: Record<EMuscleType, IMuscleData>,
+  activityMap: Record<Muscle, IMuscleData>,
   highlightedColors: string[],
-  muscle: EMuscleType
+  muscle: Muscle
 ): string | undefined => {
   const { frequency } = activityMap[muscle];
 
@@ -26,16 +32,19 @@ const fillIntensityColor = (
 /**
  * Function which generates object with muscle data
  */
-const fillMuscleData = (data: IExerciseData[]) => {
-  return data.reduce((acc, exercise: IExerciseData) => {
-    for (const muscle of exercise.muscles) {
-      acc[muscle].exercises = [...acc[muscle].exercises, exercise.name]
-      acc[muscle].frequency += exercise.frequency || 1
-    }
+const fillMuscleData = (data: IExerciseData[]): Record<Muscle, IMuscleData> => {
+  return data.reduce(
+    (acc, exercise: IExerciseData) => {
+      for (const muscle of exercise.muscles) {
+        acc[muscle].exercises = [...acc[muscle].exercises, exercise.name];
+        acc[muscle].frequency += exercise.frequency || 1;
+      }
 
-    return acc
-  }, { ...DEFAULT_MUSCLE_DATA })
-}
+      return acc;
+    },
+    { ...DEFAULT_MUSCLE_DATA }
+  );
+};
 
 /**
  * Component which displays a model of a body. Accepts many optional props for manipulating functionality or visuals of the component.
@@ -64,36 +73,37 @@ export default function Model({
   style,
   type = DEFAULT_MODEL_TYPE,
 }: IModelProps) {
+  const muscleData = React.useRef<Record<Muscle, IMuscleData>>(fillMuscleData([...data]));
 
-  const muscleData = React.useRef<Record<EMuscle, IMuscleData>>(fillMuscleData([...data]))
-
-  const handleClick = (muscle: EMuscle, callback?: (data: IMuscleStats) => void) => {
+  const handleClick = (muscle: Muscle, callback?: (data: IMuscleStats) => void) => {
     callback && callback({ muscle, data: muscleData.current[muscle] });
   };
 
   return (
-    <Svg
+    <svg
       width="100%"
       height="100%"
       viewBox="0 0 100 200"
-      style={style}
+      style={{
+        width: '100%',
+        height: 'auto',
+        ...style,
+      }}
     >
-      {
-        (type === EModel.POSTERIOR ? posteriorData : anteriorData).map(exercise =>
-          exercise.svgPoints.map((points, index) => (
-            <Polygon
-              key={index}
-              points={points}
-              style={{
-                fill: fillIntensityColor(muscleData.current, highlightedColors, exercise.muscle),
-              }}
-              onClick={() => handleClick(exercise.muscle, onClick)}
-              bodyColor={bodyColor}
-              hoverColor={hoverColor}
-            />
-          ))
-        )
-      }
-    </Svg>
+      {(type === ModelType.POSTERIOR ? posteriorData : anteriorData).map(exercise =>
+        exercise.svgPoints.map((points, index) => (
+          <Polygon
+            key={index}
+            points={points}
+            style={{
+              fill: fillIntensityColor(muscleData.current, highlightedColors, exercise.muscle),
+            }}
+            onClick={() => handleClick(exercise.muscle, onClick)}
+            bodyColor={bodyColor}
+            hoverColor={hoverColor}
+          />
+        ))
+      )}
+    </svg>
   );
-};
+}
