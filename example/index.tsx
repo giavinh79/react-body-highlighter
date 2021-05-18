@@ -18,8 +18,8 @@ const handleClick = ({ muscle, data }) => {
 const App = () => {
   return (
     <div style={styles.container}>
-      <Model data={data} onClick={handleClick} bodyColor='#ccc' />
-      <Model type="posterior" data={data} highlightedColors={['#e65a5a']} onClick={handleClick} style={{ width: '20rem' }} />
+      <Model data={data} onClick={handleClick} bodyColor="#ccc" />
+      <Model type="posterior" data={data} highlightedColors={['#e65a5a']} onClick={handleClick} />
     </div>
   );
 };
