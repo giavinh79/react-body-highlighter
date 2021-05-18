@@ -7,7 +7,7 @@
 This package was created to have a body highlighter component compatible with React.js with minimal dependencies and some extra props for further functionality. The SVG polygons were leveraged from the React Native package [react-native-body-highlighter](https://github.com/HichamELBSI/react-native-body-highlighter).
 
 <p align="center">
-  <img width="260" src="https://github.com/GV79/react-body-highlighter/blob/master/image/anterior-example.png" alt="React Body Highlighter">
+  <img width="260" src="https://raw.githubusercontent.com/GV79/react-body-highlighter/master/image/anterior-example.png" alt="React Body Highlighter">
 </p>
 
 ## Installation
@@ -52,6 +52,7 @@ All props are optional so if they are not passed to the component, they will fal
 | highlightedColors | Array containing colors to display depending on frequency a muscle was worked (array[frequency-1] = color). For an example of how this works, see the CodeSandbox example above in the *Usage* section.                                                                 | []               | `['#0984e3', '#74b9ff']` |
 | hoverColor        | Color shown when a user hovers over an unworked muscle                                      | String           | `#757782`                |
 | onClick           | Callback when muscle is clicked. The function will get passed a JSON object of the following structure: `{ muscle: 'name', stats: { exercises: [''], frequency: 0 } }`                                                                                                 | (exercise) => {} |                         |
+| style             | CSSProperties style object that gets passed to SVG's parent container (div)                 | Object           |                          |
 | svgStyle          | CSSProperties style object that gets passed to SVG element                                  | Object           |                          |
 | type              | Denotes type of model view (values: 'anterior' or 'posterior')                              | String           | `anterior`               |
 
