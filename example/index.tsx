@@ -1,7 +1,8 @@
 import 'react-app-polyfill/ie11';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import Model, { IExerciseData } from '../src/index';
+import Model from '../src/index';
+import ProductionModel, { IExerciseData } from 'react-body-highlighter'
 
 const data: IExerciseData[] = [
   { name: 'Bench Press', muscles: ['chest', 'triceps', 'front-deltoids'] },
@@ -19,7 +20,7 @@ const App = () => {
   return (
     <div style={styles.container}>
       <Model data={data} onClick={handleClick} bodyColor="#ccc" />
-      <Model type="posterior" data={data} highlightedColors={['#e65a5a']} onClick={handleClick} />
+      <ProductionModel type="posterior" data={data} highlightedColors={['#e65a5a']} onClick={handleClick} />
     </div>
   );
 };
