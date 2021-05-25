@@ -22,24 +22,28 @@ $ yarn add react-body-highlighter
 
 ## Usage
 
-```js
+**Example (version 2+):**
+
+```ts
 import React from 'react';
-import Model from 'react-body-highlighter';
+import Model, { IExerciseData } from 'react-body-highlighter';
 
 export default function Component() {
+  const data: IExerciseData[] = [
+    { name: 'Bench Press', muscles: ['chest', 'triceps', 'front-deltoids'] },
+    { name: 'Push Ups', muscles: ['chest'] },
+  ];
+
   return (
     <Model
-      data={[
-        { name: 'Bench Press', muscles: ['chest', 'triceps', 'front-deltoids'] },
-        { name: 'Push Ups', muscles: ['chest'] },
-      ]}
+      data={data}
       style={{ width: '20rem', padding: '5rem' }}
     />
   );
 }
 ```
 
-**Example**: https://codesandbox.io/s/condescending-leaf-qsp4m?file=/src/App.tsx
+**Example (version 1.5)**: https://codesandbox.io/s/condescending-leaf-qsp4m?file=/src/App.tsx
 
 ## Props
 
