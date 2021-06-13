@@ -33,11 +33,19 @@ export default function Component() {
     { name: 'Bench Press', muscles: ['chest', 'triceps', 'front-deltoids'] },
     { name: 'Push Ups', muscles: ['chest'] },
   ];
+  
+  const handleClick = ({ muscle, data }) => {
+    const { exercises, frequency } = data;
+
+    const message = `You clicked the ${muscle}! You've worked out this muscle ${frequency} times through the following exercises: ${JSON.stringify(exercises)}`
+    alert(message);
+  };
 
   return (
     <Model
       data={data}
       style={{ width: '20rem', padding: '5rem' }}
+      onClick={handleClick}
     />
   );
 }
