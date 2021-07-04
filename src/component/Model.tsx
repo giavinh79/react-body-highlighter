@@ -1,50 +1,10 @@
 import * as React from 'react';
 
-import { ModelType, Muscle, IExerciseData, IModelProps, IMuscleData, IMuscleStats } from './metadata';
+import { ModelType, Muscle, IModelProps, IMuscleData, IMuscleStats } from './metadata';
 
 import { anteriorData, posteriorData } from '../assets';
-import { DEFAULT_MUSCLE_DATA, DEFAULT_BODY_COLOR, DEFAULT_HIGHLIGHTED_COLORS, DEFAULT_MODEL_TYPE } from '../constants';
-
-/*
- * Utility function for choosing backup value if first value is undefined
- */
-const ensure = (value: string | undefined, backupValue: string): string => {
-  return value == null ? backupValue : value;
-};
-
-/**
- * Function which determines color of muscle based on how often it has been exercised
- */
-const fillIntensityColor = (
-  activityMap: Record<Muscle, IMuscleData>,
-  highlightedColors: string[],
-  muscle: Muscle
-): string | undefined => {
-  const { frequency } = activityMap[muscle];
-
-  if (frequency === 0) {
-    return undefined;
-  }
-
-  return highlightedColors[Math.min(highlightedColors.length - 1, frequency - 1)];
-};
-
-/**
- * Function which generates object with muscle data
- */
-const fillMuscleData = (data: IExerciseData[]): Record<Muscle, IMuscleData> => {
-  return data.reduce(
-    (acc, exercise: IExerciseData) => {
-      for (const muscle of exercise.muscles) {
-        acc[muscle].exercises = [...acc[muscle].exercises, exercise.name];
-        acc[muscle].frequency += exercise.frequency || 1;
-      }
-
-      return acc;
-    },
-    { ...JSON.parse(JSON.stringify(DEFAULT_MUSCLE_DATA)) }
-  );
-};
+import { ensure, fillIntensityColor, fillMuscleData } from '../utils';
+import { DEFAULT_BODY_COLOR, DEFAULT_HIGHLIGHTED_COLORS, DEFAULT_MODEL_TYPE } from '../constants';
 
 /**
  * Component which displays a model of a body. Accepts many optional props for manipulating functionality or visuals of the component.
