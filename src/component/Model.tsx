@@ -37,7 +37,7 @@ export default function Model({
 
   const modelData = type === ModelType.ANTERIOR ? anteriorData : posteriorData;
 
-  const handleClick = (muscle: Muscle, callback?: (data: IMuscleStats) => void) => {
+  const handleClick = (muscle: Muscle, callback?: (exercise: IMuscleStats) => void) => {
     callback && callback({ muscle, data: muscleData.current[muscle] });
   };
 

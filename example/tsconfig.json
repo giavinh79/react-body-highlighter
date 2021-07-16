@@ -14,6 +14,7 @@
     "sourceMap": true,
     "lib": ["es2015", "es2016", "dom"],
     "baseUrl": ".",
-    "types": ["node"]
+    "types": ["node"],
+    "strict": true
   }
 }
