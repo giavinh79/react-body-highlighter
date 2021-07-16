@@ -1,4 +1,4 @@
-import { IExerciseData, IMuscleData, Muscle } from 'component/metadata';
+import { IExerciseData, IMuscleData, Muscle } from '../component/metadata';
 import { DEFAULT_MUSCLE_DATA } from '../constants';
 
 /*
