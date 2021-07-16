@@ -26,7 +26,7 @@ $ yarn add react-body-highlighter
 
 ```ts
 import React from 'react';
-import Model, { IExerciseData } from 'react-body-highlighter';
+import Model, { IExerciseData, IMuscleStats } from 'react-body-highlighter';
 
 export default function Component() {
   const data: IExerciseData[] = [
@@ -34,7 +34,7 @@ export default function Component() {
     { name: 'Push Ups', muscles: ['chest'] },
   ];
   
-  const handleClick = ({ muscle, data }) => {
+  const handleClick = ({ muscle, data }: IMuscleStats) => {
     const { exercises, frequency } = data;
 
     const message = `You clicked the ${muscle}! You've worked out this muscle ${frequency} times through the following exercises: ${JSON.stringify(exercises)}`
