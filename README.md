@@ -34,12 +34,12 @@ export default function Component() {
     { name: 'Push Ups', muscles: ['chest'] },
   ];
   
-  const handleClick = ({ muscle, data }: IMuscleStats) => {
+  const handleClick = React.useCallback(({ muscle, data }: IMuscleStats) => {
     const { exercises, frequency } = data;
 
-    const message = `You clicked the ${muscle}! You've worked out this muscle ${frequency} times through the following exercises: ${JSON.stringify(exercises)}`
-    alert(message);
-  };
+    alert(`You clicked the ${muscle}! You've worked out this muscle ${frequency} times through the following exercises: ${JSON.stringify(exercises)}`)
+
+  }, [data]);
 
   return (
     <Model

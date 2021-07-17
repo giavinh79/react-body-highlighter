@@ -15,7 +15,7 @@ import { DEFAULT_BODY_COLOR, DEFAULT_HIGHLIGHTED_COLORS, DEFAULT_MODEL_TYPE } fr
  * @param onClick Callback function when a muscle is clicked (returns back object with muscle-related data)
  * @param svgStyle Style object that gets passed to SVG element
  * @param style Style object that gets passed to SVG parent wrapper (div)
- * @param type Denotes type of model (default anterior view vs posterior view)
+ * @param type Denotes type of model (default `anterior` view vs `posterior` view)
  *
  * @component
  * @example
@@ -24,7 +24,7 @@ import { DEFAULT_BODY_COLOR, DEFAULT_HIGHLIGHTED_COLORS, DEFAULT_MODEL_TYPE } fr
  *   <Model type="posterior" data={data} />
  * )
  */
-export default function Model({
+export default React.memo(function Model({
   data = [],
   bodyColor = DEFAULT_BODY_COLOR,
   highlightedColors = DEFAULT_HIGHLIGHTED_COLORS,
@@ -68,4 +68,4 @@ export default function Model({
       </svg>
     </div>
   );
-}
+});
