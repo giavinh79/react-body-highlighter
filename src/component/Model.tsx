@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { ModelType, Muscle, IModelProps, IMuscleData, IMuscleStats } from './metadata';
+import { ModelType, Muscle, IModelProps, IMuscleStats } from './metadata';
 
 import { anteriorData, posteriorData } from '../assets';
 import { ensure, fillIntensityColor, fillMuscleData } from '../utils';
@@ -33,12 +33,12 @@ export default function Model({
   style,
   type = DEFAULT_MODEL_TYPE,
 }: IModelProps) {
-  const muscleData = React.useRef<Record<Muscle, IMuscleData>>(fillMuscleData([...data]));
+  const muscleData = fillMuscleData([...data]);
 
   const modelData = type === ModelType.ANTERIOR ? anteriorData : posteriorData;
 
   const handleClick = (muscle: Muscle, callback?: (exercise: IMuscleStats) => void) => {
-    callback && callback({ muscle, data: muscleData.current[muscle] });
+    callback && callback({ muscle, data: muscleData[muscle] });
   };
 
   return (
@@ -60,7 +60,7 @@ export default function Model({
               onClick={() => handleClick(exercise.muscle, onClick)}
               style={{
                 cursor: 'pointer',
-                fill: ensure(fillIntensityColor(muscleData.current, highlightedColors, exercise.muscle), bodyColor),
+                fill: ensure(fillIntensityColor(muscleData, highlightedColors, exercise.muscle), bodyColor),
               }}
             />
           ))
