@@ -31,7 +31,7 @@ function App() {
         <Model data={data} onClick={handleClick} bodyColor="#ccc" />
         <ProductionModel type="posterior" data={data} highlightedColors={['#e65a5a']} onClick={handleClick} />
       </div>
-      <button onClick={addNewExerciseTest} style={styles.button}>Add one more bench press</button>
+      <button onClick={addNewExerciseTest} style={styles.button}>Add pec deck chest exercise</button>
       <button onClick={() => setExampleState(!exampleState)}>Re-render parent</button>
     </>
   );

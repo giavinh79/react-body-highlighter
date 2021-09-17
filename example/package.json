@@ -1,7 +1,6 @@
 {
   "name": "example",
   "version": "1.0.0",
-  "main": "index.js",
   "license": "MIT",
   "scripts": {
     "start": "parcel index.html",
@@ -19,7 +18,7 @@
   "devDependencies": {
     "@types/react": "^16.14.6",
     "@types/react-dom": "^16.9.13",
-    "parcel": "^2.0.0-beta.2",
+    "parcel": "^2.0.0-rc.0",
     "typescript": "^3.9.9"
   }
 }
