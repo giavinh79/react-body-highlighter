@@ -1,5 +1,6 @@
 # [react-body-highlighter](https://www.npmjs.com/package/react-body-highlighter)
 
+[![CI](https://github.com/GV79/react-body-highlighter/actions/workflows/main.yml/badge.svg)](https://github.com/GV79/react-body-highlighter/actions/workflows/main.yml)
 [![Npm Version][npm-version-image]][npm-version-url]
 [![License][license-image]][license-url]
 [![Downloads][downloads-image]][downloads-url]
