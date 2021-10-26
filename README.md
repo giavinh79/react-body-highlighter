@@ -23,7 +23,9 @@ $ yarn add react-body-highlighter
 
 ## Usage
 
-**Example (version 2+):**
+**Example**
+
+[CodeSandbox](https://codesandbox.io/s/festive-swanson-995db?file=/src/App.tsx)
 
 ```ts
 import React from 'react';
@@ -51,8 +53,6 @@ export default function Component() {
   );
 }
 ```
-
-**Example (version 1.5)**: https://codesandbox.io/s/condescending-leaf-qsp4m?file=/src/App.tsx
 
 ## Props
 
