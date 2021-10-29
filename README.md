@@ -1,5 +1,6 @@
 # [react-body-highlighter](https://www.npmjs.com/package/react-body-highlighter)
 
+[![CI](https://github.com/GV79/react-body-highlighter/actions/workflows/main.yml/badge.svg)](https://github.com/GV79/react-body-highlighter/actions/workflows/main.yml)
 [![Npm Version][npm-version-image]][npm-version-url]
 [![License][license-image]][license-url]
 [![Downloads][downloads-image]][downloads-url]
@@ -22,7 +23,9 @@ $ yarn add react-body-highlighter
 
 ## Usage
 
-**Example (version 2+):**
+**Example**
+
+[CodeSandbox](https://codesandbox.io/s/festive-swanson-995db?file=/src/App.tsx)
 
 ```ts
 import React from 'react';
@@ -50,8 +53,6 @@ export default function Component() {
   );
 }
 ```
-
-**Example (version 1.5)**: https://codesandbox.io/s/condescending-leaf-qsp4m?file=/src/App.tsx
 
 ## Props
 
