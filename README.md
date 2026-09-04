@@ -114,11 +114,12 @@ Otherwise, feel free to fork the repo and make any adjustments to your liking!
 ## Development
 
 ```sh
+mise install       # Node and pnpm versions from mise.toml
 pnpm install
-pnpm dev            # Storybook on http://localhost:6006 with hot reload
-pnpm test           # unit tests in jsdom
-pnpm test:browser   # the same component in headless Chromium
-pnpm build          # ESM, CJS and declarations into dist/
+pnpm dev           # Storybook on http://localhost:6006 with hot reload
+pnpm lint          # oxlint, including TypeScript diagnostics
+pnpm test          # Rstest in jsdom
+pnpm build         # ESM, CJS and declarations into dist/
 ```
 
 Lint and formatting run on staged files through lefthook. Every user-facing change needs a changeset: `pnpm changeset` writes one, and merging to `master` opens a release pull request from the pending changesets.
