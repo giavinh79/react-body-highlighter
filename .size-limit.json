@@ -1,0 +1,12 @@
+[
+  {
+    "name": "ESM",
+    "path": "dist/index.js",
+    "limit": "4 kB"
+  },
+  {
+    "name": "CJS, require",
+    "path": "dist/index.cjs",
+    "limit": "4.3 kB"
+  }
+]
