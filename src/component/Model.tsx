@@ -39,9 +39,9 @@ export default memo(function Model({
     <div style={style} className="rbh-wrapper">
       <svg className="rbh" width="100%" height="100%" viewBox="0 0 100 200" style={svgStyle}>
         {modelData.map((exercise) =>
-          exercise.svgPoints.map((points, index) => (
+          exercise.svgPoints.map((points) => (
             <polygon
-              key={`${exercise.muscle}-${index}`}
+              key={points}
               points={points}
               onClick={() => onClick?.({ muscle: exercise.muscle, data: muscleData[exercise.muscle] })}
               style={{

@@ -1,6 +1,34 @@
-import { type IExerciseData, type IMuscleData, type Muscle, MuscleType } from '../component/metadata';
+import type { IExerciseData, IMuscleData, Muscle } from '../component/metadata';
 
-const MUSCLES = [...new Set<Muscle>(Object.values(MuscleType))];
+const empty = (): IMuscleData => ({ exercises: [], frequency: 0 });
+
+/**
+ * A fresh record with every muscle at zero. Adding a value to `Muscle` fails to compile until it is listed here.
+ */
+export const emptyMuscleData = (): Record<Muscle, IMuscleData> => ({
+  trapezius: empty(),
+  'upper-back': empty(),
+  'lower-back': empty(),
+  chest: empty(),
+  biceps: empty(),
+  triceps: empty(),
+  forearm: empty(),
+  'back-deltoids': empty(),
+  'front-deltoids': empty(),
+  abs: empty(),
+  obliques: empty(),
+  adductor: empty(),
+  abductors: empty(),
+  hamstring: empty(),
+  quadriceps: empty(),
+  calves: empty(),
+  gluteal: empty(),
+  head: empty(),
+  neck: empty(),
+  knees: empty(),
+  'left-soleus': empty(),
+  'right-soleus': empty(),
+});
 
 /**
  * Color for a muscle based on how often it has been exercised, or undefined when it has not been.
@@ -21,19 +49,17 @@ export const fillIntensityColor = (
 
 /**
  * Per-muscle exercise names and total frequency. Unknown muscle names are ignored.
+ * An exercise without `frequency` counts once; an explicit `0` adds nothing.
  */
 export const fillMuscleData = (data: IExerciseData[]): Record<Muscle, IMuscleData> => {
-  const result = {} as Record<Muscle, IMuscleData>;
-  for (const muscle of MUSCLES) {
-    result[muscle] = { exercises: [], frequency: 0 };
-  }
+  const result = emptyMuscleData();
 
   for (const exercise of data) {
     for (const muscle of exercise.muscles) {
       const entry = result[muscle];
       if (!entry) continue;
       entry.exercises.push(exercise.name);
-      entry.frequency += exercise.frequency || 1;
+      entry.frequency += exercise.frequency ?? 1;
     }
   }
 

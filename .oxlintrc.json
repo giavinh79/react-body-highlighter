@@ -7,17 +7,22 @@
   },
   "categories": {
     "correctness": "error",
-    "suspicious": "warn"
+    "suspicious": "error"
   },
   "rules": {
     "react/rules-of-hooks": "error",
-    "react/exhaustive-deps": "warn",
+    "react/exhaustive-deps": "error",
+    "react/no-array-index-key": "error",
     "react/react-in-jsx-scope": "off",
-    "typescript/no-unsafe-type-assertion": "off"
+    "typescript/no-deprecated": "error",
+    "typescript/prefer-nullish-coalescing": "error",
+    "eqeqeq": ["error", "always", { "null": "ignore" }]
   },
   "ignorePatterns": ["dist", "example"],
   "options": {
     "typeAware": true,
-    "typeCheck": true
+    "typeCheck": true,
+    "denyWarnings": true,
+    "reportUnusedDisableDirectives": "error"
   }
 }
