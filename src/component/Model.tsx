@@ -38,7 +38,7 @@ export default React.memo(function Model({
   const modelData = type === ModelType.ANTERIOR ? anteriorData : posteriorData;
 
   const handleClick = (muscle: Muscle, callback?: (exercise: IMuscleStats) => void) => {
-    callback && callback({ muscle, data: muscleData[muscle] });
+    callback?.({ muscle, data: muscleData[muscle] });
   };
 
   return (
