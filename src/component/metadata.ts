@@ -1,4 +1,4 @@
-import { CSSProperties } from 'react';
+import type { CSSProperties } from 'react';
 
 export const MuscleType = {
   TRAPEZIUS: 'trapezius',
@@ -32,7 +32,7 @@ export const ModelType = {
   ANTERIOR: 'anterior',
 } as const;
 
-type ModelType = (typeof ModelType)[keyof typeof ModelType];
+export type ModelType = (typeof ModelType)[keyof typeof ModelType];
 
 export interface IExerciseData {
   name: string;

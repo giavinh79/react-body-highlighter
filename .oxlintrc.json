@@ -1,14 +1,18 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
   "plugins": ["typescript", "unicorn", "oxc", "import", "react", "jsx-a11y"],
-  "env": { "browser": true, "es2022": true },
+  "env": {
+    "browser": true,
+    "es2022": true
+  },
   "categories": {
     "correctness": "error",
     "suspicious": "warn"
   },
   "rules": {
     "react/rules-of-hooks": "error",
-    "react/exhaustive-deps": "warn"
+    "react/exhaustive-deps": "warn",
+    "react/react-in-jsx-scope": "off"
   },
   "ignorePatterns": ["dist", "example"]
 }

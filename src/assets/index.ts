@@ -1,4 +1,4 @@
-import { Muscle, MuscleType } from '../component/metadata';
+import { type Muscle, MuscleType } from '../component/metadata';
 interface ISVGModelData {
   muscle: Muscle;
   svgPoints: string[];

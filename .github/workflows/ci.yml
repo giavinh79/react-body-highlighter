@@ -28,3 +28,11 @@ jobs:
       - run: pnpm format:check
       - run: pnpm typecheck
       - run: pnpm test
+      - run: pnpm build
+      - run: pnpm check:pkg
+      - run: pnpm analyze
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: rsdoctor-report
+          path: .rsdoctor/rsdoctor-report.html
+          retention-days: 14

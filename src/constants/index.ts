@@ -1,4 +1,4 @@
-import { ModelType, Muscle, IMuscleData } from '../component/metadata';
+import { ModelType, type Muscle, type IMuscleData } from '../component/metadata';
 
 export const DEFAULT_MUSCLE_DATA: Record<Muscle, IMuscleData> = {
   trapezius: { exercises: [], frequency: 0 },

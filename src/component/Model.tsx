@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { ModelType, Muscle, IModelProps, IMuscleStats } from './metadata';
+import { ModelType, type Muscle, type IModelProps, type IMuscleStats } from './metadata';
 
 import { anteriorData, posteriorData } from '../assets';
 import { ensure, fillIntensityColor, fillMuscleData } from '../utils';
