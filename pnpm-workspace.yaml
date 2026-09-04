@@ -11,7 +11,8 @@ trustPolicy: no-downgrade
 trustPolicyExclude:
   - semver@5.7.2
   - semver@6.3.1
-# No dependency may run install scripts. lefthook hooks are installed by the prepare script instead.
+# No dependency may run install scripts. lefthook hooks are installed by the prepare script instead;
+# esbuild's postinstall only re-checks the platform binary its optional dependency already provides.
 allowBuilds:
   lefthook: false
-engineStrict: true
+  esbuild: false

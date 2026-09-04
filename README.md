@@ -25,7 +25,7 @@ $ yarn add react-body-highlighter
 
 **Example**
 
-[CodeSandbox](https://codesandbox.io/s/festive-swanson-995db?file=/src/App.tsx)
+[Storybook](https://giavinh79.github.io/react-body-highlighter/) shows every prop with live controls.
 
 ```ts
 import React from 'react';
@@ -62,7 +62,7 @@ All props are optional so if they are not passed to the component, they will fal
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- | ------------------------ |
 | bodyColor         | Default color of unworked body muscle                                                                                                                                                                                                                   | String           | `#B6BDC3`                |
 | data              | Data array containing exercise JSON objects: `{ name: 'Bicep Curl', muscles: ['biceps'] }`. While the `name` and `muscles` attributes are required, you may optionally provide another attribute `frequency` to represent the exercise count/intensity. | Object[]         |                          |
-| highlightedColors | Array containing colors to display depending on frequency a muscle was worked (array[frequency-1] = color). For an example of how this works, see the CodeSandbox example above in the _Usage_ section.                                                 | []               | `['#0984e3', '#74b9ff']` |
+| highlightedColors | Array containing colors to display depending on frequency a muscle was worked (array[frequency-1] = color). See the Frequency Scale story in Storybook.                                                                                                 | []               | `['#0984e3', '#74b9ff']` |
 | onClick           | Callback when muscle is clicked. The function will get passed a JSON object of the following structure: `{ muscle: 'name', stats: { exercises: [''], frequency: 0 } }`                                                                                  | (exercise) => {} |                          |
 | style             | CSSProperties style object that gets passed to SVG's parent container (div)                                                                                                                                                                             | Object           |                          |
 | svgStyle          | CSSProperties style object that gets passed to SVG element                                                                                                                                                                                              | Object           |                          |
@@ -107,9 +107,21 @@ neck
 
 The main SVG element has a class name `.rbh` which will allow you to manually change any styles necessary.
 
-For example, you can add something like `.rhb polygon:hover { fill: #757782 !important; }` to your `.css` file to change the muscle color on mouse hover.
+For example, you can add something like `.rbh polygon:hover { fill: #757782 !important; }` to your `.css` file to change the muscle color on mouse hover.
 
 Otherwise, feel free to fork the repo and make any adjustments to your liking!
+
+## Development
+
+```sh
+pnpm install
+pnpm dev            # Storybook on http://localhost:6006 with hot reload
+pnpm test           # unit tests in jsdom
+pnpm test:browser   # the same component in headless Chromium
+pnpm build          # ESM, CJS and declarations into dist/
+```
+
+Lint and formatting run on staged files through lefthook.
 
 [license-image]: http://img.shields.io/npm/l/react-body-highlighter.svg
 [license-url]: LICENSE
