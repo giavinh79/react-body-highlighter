@@ -3,6 +3,10 @@
 minimumReleaseAge: 10080
 # Fail if a dependency's trust evidence weakens (trusted publisher -> provenance -> none).
 trustPolicy: no-downgrade
+# semver 5 and 6 predate npm provenance; newer majors have it, which the policy reads as a downgrade.
+trustPolicyExclude:
+  - semver@5.7.2
+  - semver@6.3.1
 # No dependency may run install scripts. lefthook hooks are installed by the prepare script instead.
 allowBuilds:
   lefthook: false
