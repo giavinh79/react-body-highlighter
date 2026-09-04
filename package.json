@@ -48,17 +48,15 @@
     "build": "rslib build",
     "dev": "rslib build --watch",
     "analyze": "RSDOCTOR=true rslib build",
-    "test": "rstest run --project unit",
-    "test:watch": "rstest watch --project unit",
+    "test": "rstest run",
+    "test:watch": "rstest watch",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
     "format": "oxfmt",
     "format:check": "oxfmt --check",
     "check:pkg": "publint --strict && pnpm pack --out .pack/pkg.tgz && attw .pack/pkg.tgz",
     "prepare": "lefthook install",
-    "prepublishOnly": "pnpm build && pnpm check:pkg",
-    "test:browser": "rstest run --project browser",
-    "test:all": "rstest run"
+    "prepublishOnly": "pnpm build && pnpm check:pkg"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.5",
