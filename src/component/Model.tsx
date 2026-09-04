@@ -37,7 +37,7 @@ export default memo(function Model({
 
   return (
     <div style={style} className="rbh-wrapper">
-      <svg className="rbh" width="100%" height="100%" viewBox="0 0 100 200" style={svgStyle}>
+      <svg className="rbh" width="100%" height="100%" viewBox="0 0 1000 2000" style={svgStyle}>
         {modelData.map((exercise) =>
           exercise.svgPoints.map((points) => (
             <polygon
