@@ -1,0 +1,9 @@
+# pnpm 11+ already defaults to strictDepBuilds, blockExoticSubdeps and a 1-day minimumReleaseAge.
+# Newly published versions are not resolved for 7 days.
+minimumReleaseAge: 10080
+# Fail if a dependency's trust evidence weakens (trusted publisher -> provenance -> none).
+trustPolicy: no-downgrade
+# No dependency may run install scripts. lefthook hooks are installed by the prepare script instead.
+allowBuilds:
+  lefthook: false
+engineStrict: true
