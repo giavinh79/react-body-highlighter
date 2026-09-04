@@ -1,8 +1,25 @@
 import { pluginReact } from '@rsbuild/plugin-react';
 import { defineConfig } from '@rstest/core';
 
-export default defineConfig({
+const shared = {
   plugins: [pluginReact()],
   setupFiles: ['./test/setup.ts'],
-  testEnvironment: 'happy-dom',
+};
+
+export default defineConfig({
+  projects: [
+    {
+      ...shared,
+      name: 'unit',
+      testEnvironment: 'happy-dom',
+      include: ['src/**/*.test.{ts,tsx}'],
+      exclude: ['**/*.browser.test.tsx'],
+    },
+    {
+      ...shared,
+      name: 'browser',
+      include: ['src/**/*.browser.test.tsx'],
+      browser: { enabled: true, provider: 'playwright', browser: 'chromium', headless: true },
+    },
+  ],
 });
