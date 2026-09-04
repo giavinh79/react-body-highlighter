@@ -1,6 +1,6 @@
 # [react-body-highlighter](https://www.npmjs.com/package/react-body-highlighter)
 
-[![CI](https://github.com/GV79/react-body-highlighter/actions/workflows/main.yml/badge.svg)](https://github.com/GV79/react-body-highlighter/actions/workflows/main.yml)
+[![CI](https://github.com/giavinh79/react-body-highlighter/actions/workflows/ci.yml/badge.svg)](https://github.com/giavinh79/react-body-highlighter/actions/workflows/ci.yml)
 [![Npm Version][npm-version-image]][npm-version-url]
 [![License][license-image]][license-url]
 [![Downloads][downloads-image]][downloads-url]
@@ -8,7 +8,7 @@
 This package was created to have a body highlighter component compatible with React.js with minimal dependencies and some extra props for further functionality. The SVG polygons were leveraged from the React Native package [react-native-body-highlighter](https://github.com/HichamELBSI/react-native-body-highlighter).
 
 <p align="center">
-  <img width="260" src="https://raw.githubusercontent.com/GV79/react-body-highlighter/master/image/anterior-example.png" alt="React Body Highlighter">
+  <img width="260" src="https://raw.githubusercontent.com/giavinh79/react-body-highlighter/master/image/anterior-example.png" alt="React Body Highlighter">
 </p>
 
 ## Installation
