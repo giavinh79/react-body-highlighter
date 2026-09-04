@@ -1,67 +1,71 @@
 {
+  "name": "react-body-highlighter",
   "version": "2.0.5",
+  "description": "React.js component for highlighting muscles on a body model",
+  "keywords": [
+    "body",
+    "color",
+    "exercise",
+    "fitness",
+    "highlight",
+    "highlighter",
+    "model",
+    "muscle",
+    "muscles",
+    "react",
+    "svg",
+    "workout"
+  ],
+  "homepage": "https://github.com/giavinh79/react-body-highlighter",
   "license": "MIT",
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "author": "giavinh79",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/giavinh79/react-body-highlighter"
+  },
   "files": [
     "dist",
     "src"
   ],
-  "engines": {
-    "node": ">=10"
-  },
+  "main": "dist/index.js",
+  "module": "dist/react-body-highlighter.esm.js",
+  "typings": "dist/index.d.ts",
   "scripts": {
     "start": "tsdx watch",
     "build": "tsdx build",
     "test": "tsdx test --passWithNoTests",
-    "lint": "tsdx lint --fix",
-    "prepare": "tsdx build"
+    "typecheck": "tsc --noEmit",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check",
+    "prepare": "lefthook install"
   },
-  "peerDependencies": {
-    "react": ">=16"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "tsdx lint"
-    }
-  },
-  "prettier": {
-    "printWidth": 120,
-    "semi": true,
-    "singleQuote": true,
-    "trailingComma": "es5"
-  },
-  "name": "react-body-highlighter",
-  "author": "GV79",
-  "description": "React.js component for highlighting muscles on a body model",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/GV79/react-body-highlighter"
-  },
-  "homepage": "https://github.com/GV79/react-body-highlighter",
-  "keywords": [
-    "react",
-    "muscle",
-    "muscles",
-    "body",
-    "model",
-    "highlighter",
-    "highlight",
-    "color",
-    "svg",
-    "fitness",
-    "exercise",
-    "workout"
-  ],
-  "module": "dist/react-body-highlighter.esm.js",
   "devDependencies": {
+    "@types/jest": "^26.0.24",
     "@types/react": "^16.14.20",
     "@types/react-dom": "^16.9.14",
-    "husky": "^4.3.8",
+    "lefthook": "^2.1.10",
+    "oxfmt": "^0.65.0",
+    "oxlint": "^1.80.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "tsdx": "^0.14.1",
     "tslib": "^2.3.1",
     "typescript": "^3.9.10"
-  }
+  },
+  "peerDependencies": {
+    "react": ">=16"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "12.3.1",
+      "onFail": "error"
+    }
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@12.3.1"
 }

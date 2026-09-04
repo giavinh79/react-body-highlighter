@@ -1,0 +1,13 @@
+# pnpm 11+ already defaults to strictDepBuilds, blockExoticSubdeps and a 1-day minimumReleaseAge.
+# Newly published versions are not resolved for 7 days.
+minimumReleaseAge: 10080
+# Fail if a dependency's trust evidence weakens (trusted publisher -> provenance -> none).
+trustPolicy: no-downgrade
+# semver 5 and 6 predate npm provenance; newer majors have it, which the policy reads as a downgrade.
+trustPolicyExclude:
+  - semver@5.7.2
+  - semver@6.3.1
+# No dependency may run install scripts. lefthook hooks are installed by the prepare script instead.
+allowBuilds:
+  lefthook: false
+engineStrict: true

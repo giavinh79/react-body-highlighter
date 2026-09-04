@@ -38,7 +38,7 @@ export default React.memo(function Model({
   const modelData = type === ModelType.ANTERIOR ? anteriorData : posteriorData;
 
   const handleClick = (muscle: Muscle, callback?: (exercise: IMuscleStats) => void) => {
-    callback && callback({ muscle, data: muscleData[muscle] });
+    callback?.({ muscle, data: muscleData[muscle] });
   };
 
   return (
@@ -52,7 +52,7 @@ export default React.memo(function Model({
           ...svgStyle,
         }}
       >
-        {modelData.map(exercise =>
+        {modelData.map((exercise) =>
           exercise.svgPoints.map((points, index) => (
             <polygon
               key={index}
