@@ -1,40 +1,19 @@
-import type { IExerciseData, IMuscleData, Muscle } from '../component/metadata';
+import { type IExerciseData, type IMuscleData, type Muscle, MUSCLES } from '../component/metadata';
 
-const empty = (): IMuscleData => ({ exercises: [], frequency: 0 });
+const MUSCLE_SET: ReadonlySet<string> = new Set(MUSCLES);
 
-/**
- * A fresh record with every muscle at zero. Adding a value to `Muscle` fails to compile until it is listed here.
- */
-export const emptyMuscleData = (): Record<Muscle, IMuscleData> => ({
-  trapezius: empty(),
-  'upper-back': empty(),
-  'lower-back': empty(),
-  chest: empty(),
-  biceps: empty(),
-  triceps: empty(),
-  forearm: empty(),
-  'back-deltoids': empty(),
-  'front-deltoids': empty(),
-  abs: empty(),
-  obliques: empty(),
-  adductor: empty(),
-  abductors: empty(),
-  hamstring: empty(),
-  quadriceps: empty(),
-  calves: empty(),
-  gluteal: empty(),
-  head: empty(),
-  neck: empty(),
-  knees: empty(),
-  'left-soleus': empty(),
-  'right-soleus': empty(),
-});
+export const isMuscle = (value: string): value is Muscle => MUSCLE_SET.has(value);
+
+export const emptyMuscleData = (): IMuscleData => ({ exercises: [], frequency: 0 });
+
+/** Muscles that appear in the exercise data. Muscles without exercises are absent. */
+export type MuscleDataMap = Partial<Record<Muscle, IMuscleData>>;
 
 /**
  * Color for a muscle based on how often it has been exercised, or undefined when it has not been.
  */
 export const fillIntensityColor = (
-  activityMap: Record<Muscle, IMuscleData>,
+  activityMap: MuscleDataMap,
   highlightedColors: string[],
   muscle: Muscle
 ): string | undefined => {
@@ -51,13 +30,13 @@ export const fillIntensityColor = (
  * Per-muscle exercise names and total frequency. Unknown muscle names are ignored.
  * An exercise without `frequency` counts once; an explicit `0` adds nothing.
  */
-export const fillMuscleData = (data: IExerciseData[]): Record<Muscle, IMuscleData> => {
-  const result = emptyMuscleData();
+export const fillMuscleData = (data: IExerciseData[]): MuscleDataMap => {
+  const result: MuscleDataMap = {};
 
   for (const exercise of data) {
     for (const muscle of exercise.muscles) {
-      const entry = result[muscle];
-      if (!entry) continue;
+      if (!isMuscle(muscle)) continue;
+      const entry = (result[muscle] ??= emptyMuscleData());
       entry.exercises.push(exercise.name);
       entry.frequency += exercise.frequency ?? 1;
     }

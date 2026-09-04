@@ -29,6 +29,9 @@ export const MuscleType = {
 
 export type Muscle = (typeof MuscleType)[keyof typeof MuscleType];
 
+/** Every muscle name once, in `MuscleType` order. Loop over this instead of listing muscles by hand. */
+export const MUSCLES: readonly Muscle[] = [...new Set(Object.values(MuscleType))];
+
 export const ModelType = {
   POSTERIOR: 'posterior',
   ANTERIOR: 'anterior',

@@ -2,7 +2,7 @@ import { memo, useMemo } from 'react';
 
 import { anteriorData, posteriorData } from '../assets';
 import { DEFAULT_BODY_COLOR, DEFAULT_HIGHLIGHTED_COLORS, DEFAULT_MODEL_TYPE } from '../constants';
-import { fillIntensityColor, fillMuscleData } from '../utils';
+import { emptyMuscleData, fillIntensityColor, fillMuscleData } from '../utils';
 import { type IExerciseData, type IModelProps, ModelType } from './metadata';
 
 const NO_DATA: IExerciseData[] = [];
@@ -43,7 +43,9 @@ export default memo(function Model({
             <polygon
               key={points}
               points={points}
-              onClick={() => onClick?.({ muscle: exercise.muscle, data: muscleData[exercise.muscle] })}
+              onClick={() =>
+                onClick?.({ muscle: exercise.muscle, data: muscleData[exercise.muscle] ?? emptyMuscleData() })
+              }
               style={{
                 cursor: 'pointer',
                 fill: fillIntensityColor(muscleData, highlightedColors, exercise.muscle) ?? bodyColor,

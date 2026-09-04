@@ -1,13 +1,12 @@
 import { describe, expect, it } from '@rstest/core';
 
 import { type IExerciseData, MuscleType } from '../src/component/metadata';
-import { emptyMuscleData, fillIntensityColor, fillMuscleData } from '../src/utils';
+import { fillIntensityColor, fillMuscleData } from '../src/utils';
 
 describe('fillIntensityColor', () => {
   const HIGHLIGHTED_COLORS = ['#ccc', '#bbb'];
 
   const ACTIVITY_MAP = {
-    ...emptyMuscleData(),
     [MuscleType.CHEST]: { exercises: ['bench press', 'chest flies'], frequency: 0 },
     [MuscleType.ABS]: { exercises: ['crunches'], frequency: 1 },
     [MuscleType.BICEPS]: { exercises: ['bicep curl'], frequency: 3 },
@@ -39,7 +38,7 @@ describe('fillMuscleData', () => {
       frequency: 5,
     });
     expect(muscleObject[MuscleType.BICEPS]).toStrictEqual({ exercises: ['bicep curl'], frequency: 1 });
-    expect(muscleObject[MuscleType.FOREARM]).toStrictEqual({ exercises: [], frequency: 0 });
+    expect(muscleObject[MuscleType.FOREARM]).toBeUndefined();
   });
 
   it('counts an explicit frequency of 0 as nothing', () => {
@@ -54,6 +53,6 @@ describe('fillMuscleData', () => {
     const input = [{ name: 'typo', muscles: ['chest', 'not-a-muscle'] }] as unknown as IExerciseData[];
 
     expect(() => fillMuscleData(input)).not.toThrow();
-    expect(fillMuscleData(input)[MuscleType.CHEST].frequency).toBe(1);
+    expect(fillMuscleData(input)[MuscleType.CHEST]?.frequency).toBe(1);
   });
 });
