@@ -12,7 +12,12 @@
   "rules": {
     "react/rules-of-hooks": "error",
     "react/exhaustive-deps": "warn",
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "typescript/no-unsafe-type-assertion": "off"
   },
-  "ignorePatterns": ["dist", "example"]
+  "ignorePatterns": ["dist", "example"],
+  "options": {
+    "typeAware": true,
+    "typeCheck": true
+  }
 }
