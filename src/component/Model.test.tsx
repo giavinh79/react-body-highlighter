@@ -57,6 +57,37 @@ describe('Model', () => {
     });
   });
 
+  it('exposes muscles as focusable buttons only when onClick is given', () => {
+    const plain = render(<Model />).container;
+    const interactive = render(<Model onClick={() => {}} />).container;
+
+    expect(plain.querySelector('svg')).toHaveAttribute('role', 'img');
+    expect(polygon(plain, 'chest')).not.toHaveAttribute('role');
+    expect(polygon(plain, 'chest')).not.toHaveAttribute('tabindex');
+    expect(polygon(plain, 'chest')).not.toHaveStyle({ cursor: 'pointer' });
+
+    expect(interactive.querySelector('svg')).toHaveAttribute('role', 'group');
+    expect(polygon(interactive, 'chest')).toHaveAttribute('role', 'button');
+    expect(polygon(interactive, 'chest')).toHaveAttribute('tabindex', '0');
+    expect(polygon(interactive, 'chest')).toHaveAccessibleName('chest');
+    expect(polygon(interactive, 'chest')).toHaveStyle({ cursor: 'pointer' });
+  });
+
+  it('activates a muscle with Enter or Space', () => {
+    const onClick = rs.fn<(stats: IMuscleStats) => void>();
+    const { container } = render(<Model data={data} onClick={onClick} />);
+
+    fireEvent.keyDown(polygon(container, 'chest'), { key: 'Enter' });
+    fireEvent.keyDown(polygon(container, 'chest'), { key: ' ' });
+    fireEvent.keyDown(polygon(container, 'chest'), { key: 'a' });
+
+    expect(onClick).toHaveBeenCalledTimes(2);
+    expect(onClick).toHaveBeenLastCalledWith({
+      muscle: 'chest',
+      data: { exercises: ['Bench Press'], frequency: 1 },
+    });
+  });
+
   it('passes style to the wrapper and svgStyle to the svg', () => {
     const { container } = render(<Model style={{ width: '123px' }} svgStyle={{ opacity: 0.5 }} />);
 
