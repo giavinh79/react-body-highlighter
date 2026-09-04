@@ -143,7 +143,7 @@ pnpm build            # ESM, CJS and declarations into dist/
 pnpm build-storybook  # static Storybook into storybook-static/
 ```
 
-Lint and formatting run on staged files through lefthook.
+Lint and formatting run on staged files through lefthook. Every user-facing change needs a changeset: `pnpm changeset` writes one, and merging to `master` opens a release pull request from the pending changesets.
 
 [license-image]: http://img.shields.io/npm/l/react-body-highlighter.svg
 [license-url]: LICENSE
