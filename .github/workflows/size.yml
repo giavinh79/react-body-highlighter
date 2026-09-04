@@ -26,4 +26,4 @@ jobs:
           build_script: build
           # The action defaults to npx, which npm rejects because devEngines pins pnpm.
           # The fallback covers a base branch without size-limit installed.
-          script: pnpm exec size-limit --json || echo '[]'
+          script: sh -c "pnpm exec size-limit --json || echo '[]'"
