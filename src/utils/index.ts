@@ -1,15 +1,9 @@
-import type { IExerciseData, IMuscleData, Muscle } from '../component/metadata';
-import { DEFAULT_MUSCLE_DATA } from '../constants';
+import { type IExerciseData, type IMuscleData, type Muscle, MuscleType } from '../component/metadata';
 
-/*
- * Utility function for choosing backup value if first value is undefined
- */
-export const ensure = <T>(value: T | undefined, backupValue: T): T => {
-  return value == null ? backupValue : value;
-};
+const MUSCLES = [...new Set<Muscle>(Object.values(MuscleType))];
 
 /**
- * Function which determines color of muscle based on how often it has been exercised
+ * Color for a muscle based on how often it has been exercised, or undefined when it has not been.
  */
 export const fillIntensityColor = (
   activityMap: Record<Muscle, IMuscleData>,
@@ -26,18 +20,22 @@ export const fillIntensityColor = (
 };
 
 /**
- * Function which generates object with muscle data
+ * Per-muscle exercise names and total frequency. Unknown muscle names are ignored.
  */
 export const fillMuscleData = (data: IExerciseData[]): Record<Muscle, IMuscleData> => {
-  return data.reduce(
-    (acc, exercise: IExerciseData) => {
-      for (const muscle of exercise.muscles) {
-        acc[muscle].exercises = [...acc[muscle].exercises, exercise.name];
-        acc[muscle].frequency += exercise.frequency || 1;
-      }
+  const result = {} as Record<Muscle, IMuscleData>;
+  for (const muscle of MUSCLES) {
+    result[muscle] = { exercises: [], frequency: 0 };
+  }
 
-      return acc;
-    },
-    JSON.parse(JSON.stringify(DEFAULT_MUSCLE_DATA))
-  );
+  for (const exercise of data) {
+    for (const muscle of exercise.muscles) {
+      const entry = result[muscle];
+      if (!entry) continue;
+      entry.exercises.push(exercise.name);
+      entry.frequency += exercise.frequency || 1;
+    }
+  }
+
+  return result;
 };

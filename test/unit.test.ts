@@ -1,21 +1,7 @@
 import { describe, expect, it } from '@rstest/core';
 
 import { type IExerciseData, type IMuscleData, type Muscle, MuscleType } from '../src/component/metadata';
-import { ensure, fillIntensityColor, fillMuscleData } from '../src/utils';
-
-describe('ensure', () => {
-  it('returns backup value if main value is null', () => {
-    expect(ensure(null, 'test')).toBe('test');
-  });
-
-  it('returns backup value if main value is undefined', () => {
-    expect(ensure(undefined, 5)).toBe(5);
-  });
-
-  it('returns main value is it is neither null or undefined', () => {
-    expect(ensure('original', 'backup')).toBe('original');
-  });
-});
+import { fillIntensityColor, fillMuscleData } from '../src/utils';
 
 describe('fillIntensityColor', () => {
   const HIGHLIGHTED_COLORS = ['#ccc', '#bbb'];
@@ -52,6 +38,13 @@ describe('fillMuscleData', () => {
       frequency: 5,
     });
     expect(muscleObject[MuscleType.BICEPS]).toStrictEqual({ exercises: ['bicep curl'], frequency: 1 });
-    expect(muscleObject[MuscleType.FOREARM]).toBeDefined();
+    expect(muscleObject[MuscleType.FOREARM]).toStrictEqual({ exercises: [], frequency: 0 });
+  });
+
+  it('ignores unknown muscle names', () => {
+    const input = [{ name: 'typo', muscles: ['chest', 'not-a-muscle'] }] as unknown as IExerciseData[];
+
+    expect(() => fillMuscleData(input)).not.toThrow();
+    expect(fillMuscleData(input)[MuscleType.CHEST].frequency).toBe(1);
   });
 });

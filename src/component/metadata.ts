@@ -12,6 +12,8 @@ export const MuscleType = {
   FRONT_DELTOIDS: 'front-deltoids',
   ABS: 'abs',
   OBLIQUES: 'obliques',
+  ADDUCTOR: 'adductor',
+  /** @deprecated Use `ADDUCTOR`. The value has always been `'adductor'`. */
   ABDUCTOR: 'adductor',
   ABDUCTORS: 'abductors',
   HAMSTRING: 'hamstring',
@@ -54,7 +56,7 @@ export interface IModelProps {
   bodyColor?: string;
   data?: IExerciseData[];
   highlightedColors?: string[];
-  onClick?: ((exercise: IMuscleStats) => void) | (() => void);
+  onClick?: (exercise: IMuscleStats) => void;
   style?: CSSProperties;
   svgStyle?: CSSProperties;
   type?: ModelType;
