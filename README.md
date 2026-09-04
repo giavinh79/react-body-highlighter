@@ -136,8 +136,10 @@ Otherwise, feel free to fork the repo and make any adjustments to your liking!
 ## Development
 
 ```sh
+mise install       # Node and pnpm versions from mise.toml
 pnpm install
 pnpm dev              # Storybook on http://localhost:6006 with hot reload
+pnpm lint             # oxlint, including TypeScript diagnostics
 pnpm test             # unit tests under happy-dom
 pnpm build            # ESM, CJS and declarations into dist/
 pnpm build-storybook  # static Storybook into storybook-static/
