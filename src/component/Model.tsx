@@ -52,7 +52,7 @@ export default React.memo(function Model({
           ...svgStyle,
         }}
       >
-        {modelData.map(exercise =>
+        {modelData.map((exercise) =>
           exercise.svgPoints.map((points, index) => (
             <polygon
               key={index}

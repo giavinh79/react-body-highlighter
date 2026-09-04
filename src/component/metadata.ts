@@ -25,14 +25,14 @@ export const MuscleType = {
   RIGHT_SOLEUS: 'right-soleus',
 } as const;
 
-export type Muscle = typeof MuscleType[keyof typeof MuscleType];
+export type Muscle = (typeof MuscleType)[keyof typeof MuscleType];
 
 export const ModelType = {
   POSTERIOR: 'posterior',
   ANTERIOR: 'anterior',
 } as const;
 
-type ModelType = typeof ModelType[keyof typeof ModelType];
+type ModelType = (typeof ModelType)[keyof typeof ModelType];
 
 export interface IExerciseData {
   name: string;
