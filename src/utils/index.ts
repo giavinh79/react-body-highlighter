@@ -30,17 +30,13 @@ export const fillIntensityColor = (
  * Per-muscle exercise names and total frequency. Unknown muscle names are ignored.
  * An exercise without `frequency` counts once; an explicit `0` adds nothing.
  */
-export const fillMuscleData = (data: IExerciseData[]): MuscleDataMap => {
-  const result: MuscleDataMap = {};
-
-  for (const exercise of data) {
+export const fillMuscleData = (data: IExerciseData[]): MuscleDataMap =>
+  data.reduce<MuscleDataMap>((acc, exercise) => {
     for (const muscle of exercise.muscles) {
       if (!isMuscle(muscle)) continue;
-      const entry = (result[muscle] ??= emptyMuscleData());
+      const entry = (acc[muscle] ??= emptyMuscleData());
       entry.exercises.push(exercise.name);
       entry.frequency += exercise.frequency ?? 1;
     }
-  }
-
-  return result;
-};
+    return acc;
+  }, {});
