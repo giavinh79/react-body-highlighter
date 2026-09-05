@@ -1,18 +1,19 @@
-import { IExerciseData, IMuscleData, Muscle } from '../component/metadata';
-import { DEFAULT_MUSCLE_DATA } from '../constants';
+import { type IExerciseData, type IMuscleData, type Muscle, MUSCLES } from '../component/metadata';
 
-/*
- * Utility function for choosing backup value if first value is undefined
- */
-export const ensure = <T>(value: T | undefined, backupValue: T): T => {
-  return value == null ? backupValue : value;
-};
+const MUSCLE_SET: ReadonlySet<string> = new Set(MUSCLES);
+
+export const isMuscle = (value: string): value is Muscle => MUSCLE_SET.has(value);
+
+export const emptyMuscleData = (): IMuscleData => ({ exercises: [], frequency: 0 });
+
+/** Muscles that appear in the exercise data. Muscles without exercises are absent. */
+export type MuscleDataMap = Partial<Record<Muscle, IMuscleData>>;
 
 /**
- * Function which determines color of muscle based on how often it has been exercised
+ * Color for a muscle based on how often it has been exercised, or undefined when it has not been.
  */
 export const fillIntensityColor = (
-  activityMap: Record<Muscle, IMuscleData>,
+  activityMap: MuscleDataMap,
   highlightedColors: string[],
   muscle: Muscle
 ): string | undefined => {
@@ -26,18 +27,16 @@ export const fillIntensityColor = (
 };
 
 /**
- * Function which generates object with muscle data
+ * Per-muscle exercise names and total frequency. Unknown muscle names are ignored.
+ * An exercise without `frequency` counts once; an explicit `0` adds nothing.
  */
-export const fillMuscleData = (data: IExerciseData[]): Record<Muscle, IMuscleData> => {
-  return data.reduce(
-    (acc, exercise: IExerciseData) => {
-      for (const muscle of exercise.muscles) {
-        acc[muscle].exercises = [...acc[muscle].exercises, exercise.name];
-        acc[muscle].frequency += exercise.frequency || 1;
-      }
-
-      return acc;
-    },
-    JSON.parse(JSON.stringify(DEFAULT_MUSCLE_DATA))
-  );
-};
+export const fillMuscleData = (data: IExerciseData[]): MuscleDataMap =>
+  data.reduce<MuscleDataMap>((acc, exercise) => {
+    for (const muscle of exercise.muscles) {
+      if (!isMuscle(muscle)) continue;
+      const entry = (acc[muscle] ??= emptyMuscleData());
+      entry.exercises.push(exercise.name);
+      entry.frequency += exercise.frequency ?? 1;
+    }
+    return acc;
+  }, {});

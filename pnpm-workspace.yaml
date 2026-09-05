@@ -1,6 +1,10 @@
 # pnpm 11+ already defaults to strictDepBuilds, blockExoticSubdeps and a 1-day minimumReleaseAge.
-# Newly published versions are not resolved for 7 days.
-minimumReleaseAge: 10080
+# Newly published versions are not resolved for 2 days.
+minimumReleaseAge: 2880
+# rslib 1.0.0 and its dts plugin (published 2026-09-03T07:20Z) were hours short of the gate when adopted; safe to remove any time after 2026-09-05.
+minimumReleaseAgeExclude:
+  - '@rslib/core'
+  - rsbuild-plugin-dts
 # Fail if a dependency's trust evidence weakens (trusted publisher -> provenance -> none).
 trustPolicy: no-downgrade
 # semver 5 and 6 predate npm provenance; newer majors have it, which the policy reads as a downgrade.

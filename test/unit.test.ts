@@ -1,111 +1,58 @@
-//@ts-nocheck (sometimes giving partial input object for easier testing)
+import { describe, expect, it } from '@rstest/core';
 
-import { ensure, fillIntensityColor, fillMuscleData } from '../src/utils';
-import { IMuscleData, Muscle, MuscleType } from '../src/component/metadata';
-
-describe('ensure', () => {
-  it('returns backup value if main value is null', () => {
-    const mainValue = null;
-    const backupValue = 'test';
-
-    const result = ensure(mainValue, backupValue);
-
-    expect(result).toBe(backupValue);
-  });
-
-  it('returns backup value if main value is undefined', () => {
-    const mainValue = undefined;
-    const backupValue = 5;
-
-    const result = ensure(mainValue, backupValue);
-
-    expect(result).toBe(backupValue);
-  });
-
-  it('returns main value is it is neither null or undefined', () => {
-    const mainValue = 'original';
-    const backupValue = 'backup';
-
-    const result = ensure(mainValue, backupValue);
-
-    expect(result).toBe(mainValue);
-  });
-});
+import { type IExerciseData, MuscleType } from '../src/component/metadata';
+import { fillIntensityColor, fillMuscleData } from '../src/utils';
 
 describe('fillIntensityColor', () => {
   const HIGHLIGHTED_COLORS = ['#ccc', '#bbb'];
 
-  const ACTIVITY_MAP: Partial<Record<Muscle, IMuscleData>> = {
-    [MuscleType.CHEST]: {
-      exercises: ['bench press', 'chest flies'],
-      frequency: 0,
-    },
-    [MuscleType.ABS]: {
-      exercises: ['crunches'],
-      frequency: 1,
-    },
-    [MuscleType.BICEPS]: {
-      exercises: ['bicep curl'],
-      frequency: 3,
-    },
+  const ACTIVITY_MAP = {
+    [MuscleType.CHEST]: { exercises: ['bench press', 'chest flies'], frequency: 0 },
+    [MuscleType.ABS]: { exercises: ['crunches'], frequency: 1 },
+    [MuscleType.BICEPS]: { exercises: ['bicep curl'], frequency: 3 },
   };
 
   it('returns undefined if frequency of muscle being exercised is 0', () => {
-    const highlightedColor = fillIntensityColor(ACTIVITY_MAP, HIGHLIGHTED_COLORS, MuscleType.CHEST);
-
-    expect(highlightedColor).toBe(undefined);
+    expect(fillIntensityColor(ACTIVITY_MAP, HIGHLIGHTED_COLORS, MuscleType.CHEST)).toBe(undefined);
   });
 
   it('returns proper color depending on frequency', () => {
-    const highlightedColorBiceps = fillIntensityColor(ACTIVITY_MAP, HIGHLIGHTED_COLORS, MuscleType.BICEPS);
-    const highlightedColorAbs = fillIntensityColor(ACTIVITY_MAP, HIGHLIGHTED_COLORS, MuscleType.ABS);
-
-    expect(highlightedColorAbs).toBe('#ccc');
-    expect(highlightedColorBiceps).toBe('#bbb');
+    expect(fillIntensityColor(ACTIVITY_MAP, HIGHLIGHTED_COLORS, MuscleType.ABS)).toBe('#ccc');
+    expect(fillIntensityColor(ACTIVITY_MAP, HIGHLIGHTED_COLORS, MuscleType.BICEPS)).toBe('#bbb');
   });
 });
 
 describe('fillMuscleData', () => {
   it('returns proper muscle object given data', () => {
-    const EXAMPLE_INPUT = [
-      {
-        name: 'bench press',
-        muscles: [MuscleType.CHEST, MuscleType.TRICEPS],
-        frequency: 2,
-      },
-      {
-        name: 'bicep curl',
-        muscles: [MuscleType.BICEPS],
-        frequency: 1,
-      },
-      {
-        name: 'triceps pulldown',
-        muscles: [MuscleType.TRICEPS],
-        frequency: 3,
-      },
+    const input: IExerciseData[] = [
+      { name: 'bench press', muscles: [MuscleType.CHEST, MuscleType.TRICEPS], frequency: 2 },
+      { name: 'bicep curl', muscles: [MuscleType.BICEPS], frequency: 1 },
+      { name: 'triceps pulldown', muscles: [MuscleType.TRICEPS], frequency: 3 },
     ];
 
-    const EXPECTED_OUTPUT = {
-      [MuscleType.CHEST]: {
-        exercises: ['bench press'],
-        frequency: 2,
-      },
-      [MuscleType.TRICEPS]: {
-        exercises: ['bench press', 'triceps pulldown'],
-        frequency: 5,
-      },
-      [MuscleType.BICEPS]: {
-        exercises: ['bicep curl'],
-        frequency: 1,
-      },
-    };
+    const muscleObject = fillMuscleData(input);
 
-    const muscleObject = fillMuscleData(EXAMPLE_INPUT);
+    expect(muscleObject[MuscleType.CHEST]).toStrictEqual({ exercises: ['bench press'], frequency: 2 });
+    expect(muscleObject[MuscleType.TRICEPS]).toStrictEqual({
+      exercises: ['bench press', 'triceps pulldown'],
+      frequency: 5,
+    });
+    expect(muscleObject[MuscleType.BICEPS]).toStrictEqual({ exercises: ['bicep curl'], frequency: 1 });
+    expect(muscleObject[MuscleType.FOREARM]).toBeUndefined();
+  });
 
-    expect(muscleObject[MuscleType.CHEST]).toStrictEqual(EXPECTED_OUTPUT[MuscleType.CHEST]);
-    expect(muscleObject[MuscleType.TRICEPS]).toStrictEqual(EXPECTED_OUTPUT[MuscleType.TRICEPS]);
-    expect(muscleObject[MuscleType.BICEPS]).toStrictEqual(EXPECTED_OUTPUT[MuscleType.BICEPS]);
+  it('counts an explicit frequency of 0 as nothing', () => {
+    const input: IExerciseData[] = [{ name: 'Plank', muscles: ['abs'], frequency: 0 }];
 
-    expect(muscleObject[MuscleType.FOREARM]).toBeDefined(); // initializes other muscles to default values
+    expect(fillMuscleData(input)[MuscleType.ABS]).toStrictEqual({ exercises: ['Plank'], frequency: 0 });
+  });
+
+  it('ignores unknown muscle names', () => {
+    // Simulates an untyped JavaScript caller.
+    // oxlint-disable-next-line typescript/no-unsafe-type-assertion
+    const input = [{ name: 'typo', muscles: ['chest', 'not-a-muscle'] }] as unknown as IExerciseData[];
+
+    expect(() => fillMuscleData(input)).not.toThrow();
+    expect(fillMuscleData(input)[MuscleType.CHEST]?.frequency).toBe(1);
   });
 });

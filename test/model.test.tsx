@@ -1,6 +1,7 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import Model, { IExerciseData } from '../src/index';
+import { describe, expect, it } from '@rstest/core';
+import { render } from '@testing-library/react';
+
+import Model, { type IExerciseData } from '../src/index';
 
 describe('model', () => {
   it('renders without crashing', () => {
@@ -9,12 +10,10 @@ describe('model', () => {
       { name: 'Tricep Pushdown', muscles: ['triceps'] },
     ];
 
-    const div = document.createElement('div');
-
-    ReactDOM.render(
-      <Model type="posterior" data={data} highlightedColors={['#e65a5a']} onClick={() => alert('test')} />,
-      div
+    const { container } = render(
+      <Model type="posterior" data={data} highlightedColors={['#e65a5a']} onClick={() => {}} />
     );
-    ReactDOM.unmountComponentAtNode(div);
+
+    expect(container.querySelectorAll('polygon').length).toBeGreaterThan(0);
   });
 });

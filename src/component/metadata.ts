@@ -1,4 +1,4 @@
-import { CSSProperties } from 'react';
+import type { CSSProperties } from 'react';
 
 export const MuscleType = {
   TRAPEZIUS: 'trapezius',
@@ -12,6 +12,8 @@ export const MuscleType = {
   FRONT_DELTOIDS: 'front-deltoids',
   ABS: 'abs',
   OBLIQUES: 'obliques',
+  ADDUCTOR: 'adductor',
+  /** @deprecated Use `ADDUCTOR`. The value has always been `'adductor'`. */
   ABDUCTOR: 'adductor',
   ABDUCTORS: 'abductors',
   HAMSTRING: 'hamstring',
@@ -27,12 +29,15 @@ export const MuscleType = {
 
 export type Muscle = (typeof MuscleType)[keyof typeof MuscleType];
 
+/** Every muscle name once, in `MuscleType` order. Loop over this instead of listing muscles by hand. */
+export const MUSCLES: readonly Muscle[] = [...new Set(Object.values(MuscleType))];
+
 export const ModelType = {
   POSTERIOR: 'posterior',
   ANTERIOR: 'anterior',
 } as const;
 
-type ModelType = (typeof ModelType)[keyof typeof ModelType];
+export type ModelType = (typeof ModelType)[keyof typeof ModelType];
 
 export interface IExerciseData {
   name: string;
@@ -54,7 +59,7 @@ export interface IModelProps {
   bodyColor?: string;
   data?: IExerciseData[];
   highlightedColors?: string[];
-  onClick?: ((exercise: IMuscleStats) => void) | (() => void);
+  onClick?: (exercise: IMuscleStats) => void;
   style?: CSSProperties;
   svgStyle?: CSSProperties;
   type?: ModelType;

@@ -21,41 +21,66 @@
   "author": "giavinh79",
   "repository": {
     "type": "git",
-    "url": "https://github.com/giavinh79/react-body-highlighter"
+    "url": "git+https://github.com/giavinh79/react-body-highlighter.git"
   },
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
-  "main": "dist/index.js",
-  "module": "dist/react-body-highlighter.esm.js",
-  "typings": "dist/index.d.ts",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
   "scripts": {
-    "start": "tsdx watch",
-    "build": "tsdx build",
-    "test": "tsdx test --passWithNoTests",
-    "typecheck": "tsc --noEmit",
+    "build": "rslib build",
+    "dev": "rslib build --watch",
+    "analyze": "RSDOCTOR=true rslib build",
+    "test": "rstest run",
+    "test:watch": "rstest watch",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
     "format": "oxfmt",
     "format:check": "oxfmt --check",
-    "prepare": "lefthook install"
+    "check:pkg": "publint --strict && pnpm pack --out .pack/pkg.tgz && attw .pack/pkg.tgz",
+    "prepare": "lefthook install",
+    "prepublishOnly": "pnpm build && pnpm check:pkg"
   },
   "devDependencies": {
-    "@types/jest": "^26.0.24",
-    "@types/react": "^16.14.20",
-    "@types/react-dom": "^16.9.14",
+    "@arethetypeswrong/cli": "^0.18.5",
+    "@microsoft/api-extractor": "^7.59.0",
+    "@rsbuild/plugin-react": "^2.1.0",
+    "@rsdoctor/rspack-plugin": "^1.6.3",
+    "@rslib/core": "1.0.0",
+    "@rstest/core": "0.11.10",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/react": "^16.3.3",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.5",
+    "happy-dom": "^20.11.15",
     "lefthook": "^2.1.10",
     "oxfmt": "^0.65.0",
     "oxlint": "^1.80.0",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
-    "tsdx": "^0.14.1",
-    "tslib": "^2.3.1",
-    "typescript": "^3.9.10"
+    "oxlint-tsgolint": "7.0.2001",
+    "publint": "0.3.24",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "typescript": "^7.0.2"
   },
   "peerDependencies": {
-    "react": ">=16"
+    "react": ">=16.8.0"
   },
   "devEngines": {
     "packageManager": {
