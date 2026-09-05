@@ -10,12 +10,10 @@ describe('model', () => {
       { name: 'Tricep Pushdown', muscles: ['triceps'] },
     ];
 
-    const { container, unmount } = render(
+    const { container } = render(
       <Model type="posterior" data={data} highlightedColors={['#e65a5a']} onClick={() => {}} />
     );
 
     expect(container.querySelectorAll('polygon').length).toBeGreaterThan(0);
-
-    unmount();
   });
 });
