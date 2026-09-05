@@ -57,10 +57,15 @@
     "check:pkg": "publint --strict && pnpm pack --out .pack/pkg.tgz && attw .pack/pkg.tgz",
     "prepare": "lefthook install",
     "prepublishOnly": "pnpm build && pnpm check:pkg",
-    "build:storybook": "storybook build"
+    "build:storybook": "storybook build",
+    "size": "size-limit",
+    "changeset": "changeset",
+    "release": "pnpm publish --no-git-checks && changeset git-tag"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.5",
+    "@changesets/changelog-github": "^1.0.0",
+    "@changesets/cli": "^3.0.1",
     "@github-ui/storybook-addon-performance-panel": "^1.2.0",
     "@microsoft/api-extractor": "^7.59.0",
     "@rsbuild/core": "^2.2.1",
@@ -68,6 +73,7 @@
     "@rsdoctor/rspack-plugin": "^1.6.3",
     "@rslib/core": "1.0.0",
     "@rstest/core": "0.11.10",
+    "@size-limit/preset-small-lib": "^13.0.3",
     "@storybook/addon-a11y": "^10.5.10",
     "@storybook/addon-docs": "^10.5.10",
     "@storybook/icons": "^2.1.0",
@@ -86,6 +92,7 @@
     "publint": "0.3.24",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
+    "size-limit": "^13.0.3",
     "storybook": "^10.5.10",
     "storybook-react-rsbuild": "^3.4.2",
     "typescript": "^7.0.2"
