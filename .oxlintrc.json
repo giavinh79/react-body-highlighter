@@ -16,7 +16,18 @@
     "react/react-in-jsx-scope": "off",
     "typescript/no-deprecated": "error",
     "typescript/prefer-nullish-coalescing": "error",
-    "eqeqeq": ["error", "always", { "null": "ignore" }]
+    "eqeqeq": [
+      "error",
+      "always",
+      {
+        "null": "ignore"
+      }
+    ],
+    "jsx-a11y/click-events-have-key-events": "error",
+    "jsx-a11y/interactive-supports-focus": "error",
+    "jsx-a11y/no-static-element-interactions": "error",
+    "jsx-a11y/role-has-required-aria-props": "error",
+    "jsx-a11y/aria-props": "error"
   },
   "ignorePatterns": ["dist", "example"],
   "options": {

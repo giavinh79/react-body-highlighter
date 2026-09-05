@@ -122,10 +122,10 @@ importers:
         specifier: ^1.6.3
         version: 1.6.3(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(@rsbuild/core@2.1.13)(@rspack/core@2.2.1(@swc/helpers@0.5.23))(supports-color@8.1.1)
       '@rslib/core':
-        specifier: ^0.23.2
+        specifier: 0.23.2
         version: 0.23.2(@microsoft/api-extractor@7.59.0(@types/node@26.4.0))(typescript@7.0.2)
       '@rstest/core':
-        specifier: ^0.11.10
+        specifier: 0.11.10
         version: 0.11.10(happy-dom@20.11.15)(jsdom@30.0.1)
       '@testing-library/dom':
         specifier: ^10.4.1
@@ -152,10 +152,10 @@ importers:
         specifier: ^1.80.0
         version: 1.80.0(oxlint-tsgolint@7.0.2001)
       oxlint-tsgolint:
-        specifier: ^7.0.2001
+        specifier: 7.0.2001
         version: 7.0.2001
       publint:
-        specifier: ^0.3.24
+        specifier: 0.3.24
         version: 0.3.24
       react:
         specifier: ^19.2.8
