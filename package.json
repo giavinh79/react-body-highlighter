@@ -46,7 +46,7 @@
   },
   "scripts": {
     "build": "rslib build",
-    "dev": "rslib build --watch",
+    "dev": "storybook dev -p 6006",
     "analyze": "RSDOCTOR=true rslib build",
     "test": "rstest run",
     "test:watch": "rstest watch",
@@ -56,15 +56,22 @@
     "format:check": "oxfmt --check",
     "check:pkg": "publint --strict && pnpm pack --out .pack/pkg.tgz && attw .pack/pkg.tgz",
     "prepare": "lefthook install",
-    "prepublishOnly": "pnpm build && pnpm check:pkg"
+    "prepublishOnly": "pnpm build && pnpm check:pkg",
+    "build:storybook": "storybook build"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.5",
+    "@github-ui/storybook-addon-performance-panel": "^1.2.0",
     "@microsoft/api-extractor": "^7.59.0",
+    "@rsbuild/core": "^2.2.1",
     "@rsbuild/plugin-react": "^2.1.0",
     "@rsdoctor/rspack-plugin": "^1.6.3",
     "@rslib/core": "1.0.0",
     "@rstest/core": "0.11.10",
+    "@storybook/addon-a11y": "^10.5.10",
+    "@storybook/addon-docs": "^10.5.10",
+    "@storybook/icons": "^2.1.0",
+    "@storybook/react": "^10.5.10",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.3",
@@ -79,6 +86,8 @@
     "publint": "0.3.24",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
+    "storybook": "^10.5.10",
+    "storybook-react-rsbuild": "^3.4.2",
     "typescript": "^7.0.2"
   },
   "peerDependencies": {
