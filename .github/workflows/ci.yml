@@ -27,11 +27,32 @@ jobs:
       - run: pnpm lint
       - run: pnpm format:check
       - run: pnpm test
-      - name: Build with Rsdoctor report
+      - name: Build with Rsdoctor data
         run: RSDOCTOR=true pnpm build
       - run: pnpm check:pkg
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          name: rsdoctor-report
-          path: .rsdoctor/rsdoctor-report.html
-          retention-days: 14
+          name: rsdoctor-data
+          path: .rsdoctor/rsdoctor-data.json
+          retention-days: 1
+
+  # Separate job so the write token never shares a runner with node_modules.
+  bundle:
+    needs: check
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      actions: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: rsdoctor-data
+          path: .rsdoctor
+      - uses: web-infra-dev/rsdoctor-action@2fbd50933702502f12d2bbef5273afbfd829a289 # v1.1.4
+        with:
+          file_path: .rsdoctor/rsdoctor-data.json
+          target_branch: master
+          enable_ai_analysis: false

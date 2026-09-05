@@ -18,7 +18,16 @@ export default defineConfig({
   tools: {
     rspack: {
       plugins: process.env.RSDOCTOR
-        ? [new RsdoctorRspackPlugin({ output: { mode: process.env.CI ? 'brief' : 'normal', reportDir: '.rsdoctor' } })]
+        ? [
+            new RsdoctorRspackPlugin(
+              process.env.CI
+                ? {
+                    disableClientServer: true,
+                    output: { mode: 'brief', reportDir: '.rsdoctor', options: { type: ['json'] } },
+                  }
+                : { output: { reportDir: '.rsdoctor' } }
+            ),
+          ]
         : [],
     },
   },
