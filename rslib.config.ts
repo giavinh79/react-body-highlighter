@@ -23,7 +23,7 @@ export default defineConfig({
               process.env.CI
                 ? {
                     disableClientServer: true,
-                    output: { mode: 'brief', reportDir: '.rsdoctor', options: { type: ['json'] } },
+                    output: { mode: 'brief', reportDir: 'dist/.rsdoctor', options: { type: ['json'] } },
                   }
                 : { output: { reportDir: '.rsdoctor' } }
             ),
