@@ -1,7 +1,7 @@
 import { describe, expect, it } from '@rstest/core';
 
-import { type IExerciseData, MuscleType } from '../src/component/metadata';
-import { fillIntensityColor, fillMuscleData } from '../src/utils';
+import { type IExerciseData, MuscleType } from '../component/metadata';
+import { fillIntensityColor, fillMuscleData } from './index';
 
 describe('fillIntensityColor', () => {
   const HIGHLIGHTED_COLORS = ['#ccc', '#bbb'];

@@ -43,6 +43,7 @@ export default memo(function Model({
             <polygon
               key={points}
               points={points}
+              data-muscle={exercise.muscle}
               onClick={() =>
                 onClick?.({ muscle: exercise.muscle, data: muscleData[exercise.muscle] ?? emptyMuscleData() })
               }
