@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from 'storybook-react-rsbuild';
 import { type ComponentProps, useState } from 'react';
-import { fn } from 'storybook/test';
+import { expect, fn, userEvent, within } from 'storybook/test';
 
 import Model from './Model';
 import type { IExerciseData } from './metadata';
@@ -15,6 +15,7 @@ const workout: IExerciseData[] = [
 const meta = {
   title: 'Model',
   component: Model,
+  tags: ['autodocs'],
   args: {
     data: workout,
     onClick: fn(),
@@ -53,6 +54,29 @@ export const FrequencyScale: Story = {
       { name: 'Ten times', muscles: ['quadriceps'], frequency: 10 },
     ],
     highlightedColors: ['#dfe6e9', '#74b9ff', '#0984e3', '#2d3436'],
+  },
+};
+
+/** Clicking a muscle reports its name and aggregated exercise data. */
+export const ClickReportsMuscle: Story = {
+  play: async ({ args, canvasElement }) => {
+    const chest = within(canvasElement).getByRole('button', { name: 'chest' });
+    await userEvent.click(chest);
+    await expect(args.onClick).toHaveBeenCalledWith({
+      muscle: 'chest',
+      data: { exercises: ['Bench Press', 'Push Ups'], frequency: 2 },
+    });
+  },
+};
+
+/** Muscles are reachable with Tab and activate on Enter. */
+export const KeyboardActivation: Story = {
+  play: async ({ args, canvasElement }) => {
+    const first = within(canvasElement).getAllByRole('button')[0];
+    await userEvent.tab();
+    await expect(first).toHaveFocus();
+    await userEvent.keyboard('{Enter}');
+    await expect(args.onClick).toHaveBeenCalledTimes(1);
   },
 };
 
