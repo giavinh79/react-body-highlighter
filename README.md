@@ -25,7 +25,7 @@ $ yarn add react-body-highlighter
 
 **Example**
 
-[Storybook](https://giavinh79.github.io/react-body-highlighter/) shows every prop with live controls.
+[Storybook](https://master--6aa5e76e0f92a66685e95444.chromatic.com) shows every prop with live controls.
 
 ```ts
 import React from 'react';
