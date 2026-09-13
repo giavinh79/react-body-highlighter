@@ -11,6 +11,8 @@ const data: IExerciseData[] = [
 const polygon = (container: HTMLElement, muscle: string) =>
   container.querySelector<SVGPolygonElement>(`polygon[data-muscle="${muscle}"]`)!;
 
+const button = (container: HTMLElement, muscle: string) => polygon(container, muscle).parentElement!;
+
 describe('Model', () => {
   it('renders the anterior view by default and the posterior view on request', () => {
     const anterior = render(<Model />).container;
@@ -57,29 +59,48 @@ describe('Model', () => {
     });
   });
 
-  it('exposes muscles as focusable buttons only when onClick is given', () => {
+  it('exposes one button per muscle, only when onClick is given', () => {
     const plain = render(<Model />).container;
     const interactive = render(<Model onClick={() => {}} />).container;
 
     expect(plain.querySelector('svg')).toHaveAttribute('role', 'img');
-    expect(polygon(plain, 'chest')).not.toHaveAttribute('role');
-    expect(polygon(plain, 'chest')).not.toHaveAttribute('tabindex');
-    expect(polygon(plain, 'chest')).not.toHaveStyle({ cursor: 'pointer' });
+    expect(plain.querySelectorAll('[role="button"]')).toHaveLength(0);
+    expect(button(plain, 'chest')).not.toHaveStyle({ cursor: 'pointer' });
 
     expect(interactive.querySelector('svg')).toHaveAttribute('role', 'group');
-    expect(polygon(interactive, 'chest')).toHaveAttribute('role', 'button');
-    expect(polygon(interactive, 'chest')).toHaveAttribute('tabindex', '0');
-    expect(polygon(interactive, 'chest')).toHaveAccessibleName('chest');
-    expect(polygon(interactive, 'chest')).toHaveStyle({ cursor: 'pointer' });
+    expect(button(interactive, 'chest')).toHaveAttribute('role', 'button');
+    expect(button(interactive, 'chest')).toHaveAccessibleName('chest');
+    expect(button(interactive, 'chest')).toHaveStyle({ cursor: 'pointer' });
+    expect(interactive.querySelectorAll('[role="button"][aria-label="chest"]')).toHaveLength(1);
+  });
+
+  it('is a single Tab stop and moves between muscles with arrow keys', () => {
+    const { container } = render(<Model onClick={() => {}} />);
+    const buttons = [...container.querySelectorAll<SVGGElement>('[role="button"]')];
+    const last = buttons[buttons.length - 1];
+
+    expect(buttons.filter((b) => b.getAttribute('tabindex') === '0')).toHaveLength(1);
+    expect(buttons[0]).toHaveAttribute('tabindex', '0');
+
+    fireEvent.keyDown(buttons[0], { key: 'ArrowRight' });
+    expect(buttons[0]).toHaveAttribute('tabindex', '-1');
+    expect(buttons[1]).toHaveAttribute('tabindex', '0');
+
+    fireEvent.keyDown(buttons[1], { key: 'ArrowLeft' });
+    fireEvent.keyDown(buttons[0], { key: 'ArrowLeft' });
+    expect(last).toHaveAttribute('tabindex', '0');
+
+    fireEvent.keyDown(last, { key: 'Home' });
+    expect(buttons[0]).toHaveAttribute('tabindex', '0');
   });
 
   it('activates a muscle with Enter or Space', () => {
     const onClick = rs.fn<(stats: IMuscleStats) => void>();
     const { container } = render(<Model data={data} onClick={onClick} />);
 
-    fireEvent.keyDown(polygon(container, 'chest'), { key: 'Enter' });
-    fireEvent.keyDown(polygon(container, 'chest'), { key: ' ' });
-    fireEvent.keyDown(polygon(container, 'chest'), { key: 'a' });
+    fireEvent.keyDown(button(container, 'chest'), { key: 'Enter' });
+    fireEvent.keyDown(button(container, 'chest'), { key: ' ' });
+    fireEvent.keyDown(button(container, 'chest'), { key: 'a' });
 
     expect(onClick).toHaveBeenCalledTimes(2);
     expect(onClick).toHaveBeenLastCalledWith({

@@ -60,9 +60,7 @@ export const FrequencyScale: Story = {
 /** Clicking a muscle reports its name and aggregated exercise data. */
 export const ClickReportsMuscle: Story = {
   play: async ({ args, canvasElement }) => {
-    // Each side of the chest is its own polygon, so two buttons carry this name.
-    const [chest] = within(canvasElement).getAllByRole('button', { name: 'chest' });
-    await userEvent.click(chest);
+    await userEvent.click(within(canvasElement).getByRole('button', { name: 'chest' }));
     await expect(args.onClick).toHaveBeenCalledWith({
       muscle: 'chest',
       data: { exercises: ['Bench Press', 'Push Ups'], frequency: 2 },
@@ -70,12 +68,14 @@ export const ClickReportsMuscle: Story = {
   },
 };
 
-/** Muscles are reachable with Tab and activate on Enter. */
+/** The model is one Tab stop; arrow keys move between muscles and Enter activates. */
 export const KeyboardActivation: Story = {
   play: async ({ args, canvasElement }) => {
-    const first = within(canvasElement).getAllByRole('button')[0];
+    const [first, second] = within(canvasElement).getAllByRole('button');
     await userEvent.tab();
     await expect(first).toHaveFocus();
+    await userEvent.keyboard('{ArrowRight}');
+    await expect(second).toHaveFocus();
     await userEvent.keyboard('{Enter}');
     await expect(args.onClick).toHaveBeenCalledTimes(1);
   },
