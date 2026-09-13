@@ -57,7 +57,7 @@
     "check:pkg": "publint --strict && pnpm pack --out .pack/pkg.tgz && attw .pack/pkg.tgz",
     "prepare": "lefthook install",
     "prepublishOnly": "pnpm build && pnpm check:pkg",
-    "build:storybook": "storybook build"
+    "build-storybook": "storybook build"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.5",

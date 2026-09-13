@@ -30,6 +30,5 @@ jobs:
       - uses: chromaui/action@c93e0bc3a63aa176e14a75b61a31847cbfdd341c # v1
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          buildScriptName: build:storybook
           autoAcceptChanges: master
           exitOnceUploaded: true
