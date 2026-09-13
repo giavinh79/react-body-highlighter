@@ -60,7 +60,8 @@ export const FrequencyScale: Story = {
 /** Clicking a muscle reports its name and aggregated exercise data. */
 export const ClickReportsMuscle: Story = {
   play: async ({ args, canvasElement }) => {
-    const chest = within(canvasElement).getByRole('button', { name: 'chest' });
+    // Each side of the chest is its own polygon, so two buttons carry this name.
+    const [chest] = within(canvasElement).getAllByRole('button', { name: 'chest' });
     await userEvent.click(chest);
     await expect(args.onClick).toHaveBeenCalledWith({
       muscle: 'chest',
