@@ -3,9 +3,9 @@ import { type ComponentProps, useCallback, useState } from 'react';
 import { expect, fn, userEvent, within } from 'storybook/test';
 
 import Model from './Model';
-import type { IExerciseData, IMuscleStats } from './metadata';
+import { type Exercise, MODEL_TYPES, type MuscleStats } from './metadata';
 
-const workout: IExerciseData[] = [
+const workout: Exercise[] = [
   { name: 'Bench Press', muscles: ['chest', 'triceps', 'front-deltoids'] },
   { name: 'Push Ups', muscles: ['chest'] },
   { name: 'Tricep Pushdown', muscles: ['triceps'] },
@@ -22,7 +22,7 @@ const meta = {
     style: { width: '16rem' },
   },
   argTypes: {
-    type: { control: 'radio', options: ['anterior', 'posterior'] },
+    type: { control: 'radio', options: [...MODEL_TYPES] },
     bodyColor: { control: 'color' },
   },
 } satisfies Meta<typeof Model>;
@@ -72,9 +72,9 @@ export const ClickReportsMuscle: Story = {
 };
 
 function ClickReporter({ onClick, ...args }: ComponentProps<typeof Model>) {
-  const [last, setLast] = useState<IMuscleStats>();
+  const [last, setLast] = useState<MuscleStats>();
   const report = useCallback(
-    (stats: IMuscleStats) => {
+    (stats: MuscleStats) => {
       setLast(stats);
       onClick?.(stats);
     },

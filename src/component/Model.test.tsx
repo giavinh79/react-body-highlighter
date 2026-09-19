@@ -1,9 +1,9 @@
 import { describe, expect, it, rs } from '@rstest/core';
 import { fireEvent, render } from '@testing-library/react';
 
-import Model, { type IExerciseData, type IMuscleStats, type ModelType } from '../index';
+import Model, { type Exercise, type ModelType, type MuscleStats } from '../index';
 
-const data: IExerciseData[] = [
+const data: Exercise[] = [
   { name: 'Bench Press', muscles: ['chest', 'triceps', 'front-deltoids'] },
   { name: 'Tricep Pushdown', muscles: ['triceps'], frequency: 2 },
 ];
@@ -47,7 +47,7 @@ describe('Model', () => {
   });
 
   it('reports the clicked muscle with its aggregated data', () => {
-    const onClick = rs.fn<(stats: IMuscleStats) => void>();
+    const onClick = rs.fn<(stats: MuscleStats) => void>();
     const { container } = render(<Model data={data} onClick={onClick} />);
 
     fireEvent.click(polygon(container, 'triceps'));
@@ -149,7 +149,7 @@ describe('Model', () => {
   });
 
   it('activates a muscle with Enter or Space', () => {
-    const onClick = rs.fn<(stats: IMuscleStats) => void>();
+    const onClick = rs.fn<(stats: MuscleStats) => void>();
     const { container } = render(<Model data={data} onClick={onClick} />);
 
     fireEvent.keyDown(button(container, 'chest'), { key: 'Enter' });
@@ -180,7 +180,7 @@ describe('Model', () => {
   it('ignores unknown muscle names from untyped callers', () => {
     // Simulates an untyped JavaScript caller.
     // oxlint-disable-next-line typescript/no-unsafe-type-assertion
-    const untyped = [{ name: 'Typo', muscles: ['chest', 'not-a-muscle'] }] as unknown as IExerciseData[];
+    const untyped = [{ name: 'Typo', muscles: ['chest', 'not-a-muscle'] }] as unknown as Exercise[];
 
     expect(() => render(<Model data={untyped} />)).not.toThrow();
   });
