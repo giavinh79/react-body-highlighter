@@ -136,7 +136,7 @@ Otherwise, feel free to fork the repo and make any adjustments to your liking!
 ## Development
 
 ```sh
-mise install       # Node and pnpm versions from mise.toml
+mise install          # Node and pnpm versions from mise.toml
 pnpm install
 pnpm dev              # Storybook on http://localhost:6006 with hot reload
 pnpm lint             # oxlint, including TypeScript diagnostics
