@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from 'storybook-react-rsbuild';
-import { type ComponentProps, useState } from 'react';
+import { type ComponentProps, useCallback, useState } from 'react';
 import { expect, fn, userEvent, within } from 'storybook/test';
 
 import Model from './Model';
-import type { IExerciseData } from './metadata';
+import type { IExerciseData, IMuscleStats } from './metadata';
 
 const workout: IExerciseData[] = [
   { name: 'Bench Press', muscles: ['chest', 'triceps', 'front-deltoids'] },
@@ -57,25 +57,62 @@ export const FrequencyScale: Story = {
   },
 };
 
-/** Clicking a muscle reports its name and aggregated exercise data. */
+/** Clicking a muscle reports its name and aggregated exercise data. Click one to see the payload. */
 export const ClickReportsMuscle: Story = {
+  render: (args) => <ClickReporter {...args} />,
   play: async ({ args, canvasElement }) => {
-    await userEvent.click(within(canvasElement).getByRole('button', { name: 'chest' }));
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole('button', { name: 'chest' }));
     await expect(args.onClick).toHaveBeenCalledWith({
       muscle: 'chest',
       data: { exercises: ['Bench Press', 'Push Ups'], frequency: 2 },
     });
+    await expect(canvas.getByRole('status')).toHaveTextContent('"muscle": "chest"');
   },
 };
 
-/** The model is one Tab stop; arrow keys move between muscles and Enter activates. */
+function ClickReporter({ onClick, ...args }: ComponentProps<typeof Model>) {
+  const [last, setLast] = useState<IMuscleStats>();
+  const report = useCallback(
+    (stats: IMuscleStats) => {
+      setLast(stats);
+      onClick?.(stats);
+    },
+    [onClick]
+  );
+
+  return (
+    <div style={{ display: 'grid', gap: '1rem', justifyItems: 'center' }}>
+      <Model {...args} onClick={report} />
+      <output
+        style={{
+          whiteSpace: 'pre',
+          padding: '0.75rem 1rem',
+          minWidth: '16rem',
+          borderRadius: '0.5rem',
+          background: '#f4f5f7',
+          color: '#2d3436',
+          font: '0.75rem/1.5 ui-monospace, monospace',
+        }}
+      >
+        {last ? JSON.stringify(last, null, 2) : 'Click a muscle to see the onClick payload.'}
+      </output>
+    </div>
+  );
+}
+
+/** One Tab stop; Up and Down walk the body, Left and Right cross to the arms, Enter activates. A shoulder crosses back to the neck it joins. */
 export const KeyboardActivation: Story = {
   play: async ({ args, canvasElement }) => {
-    const [first, second] = within(canvasElement).getAllByRole('button');
+    const canvas = within(canvasElement);
     await userEvent.tab();
-    await expect(first).toHaveFocus();
+    await expect(canvas.getByRole('button', { name: 'head' })).toHaveFocus();
+    await userEvent.keyboard('{ArrowDown}{ArrowDown}');
+    await expect(canvas.getByRole('button', { name: 'chest' })).toHaveFocus();
     await userEvent.keyboard('{ArrowRight}');
-    await expect(second).toHaveFocus();
+    await expect(canvas.getByRole('button', { name: 'front deltoids' })).toHaveFocus();
+    await userEvent.keyboard('{ArrowLeft}');
+    await expect(canvas.getByRole('button', { name: 'neck' })).toHaveFocus();
     await userEvent.keyboard('{Enter}');
     await expect(args.onClick).toHaveBeenCalledTimes(1);
   },

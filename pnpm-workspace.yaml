@@ -16,3 +16,5 @@ trustPolicyExclude:
 allowBuilds:
   lefthook: false
   esbuild: false
+# Refuse to install a dependency whose engines field the running Node does not satisfy.
+engineStrict: true
