@@ -70,9 +70,6 @@ All props are optional so if they are not passed to the component, they will fal
 
 ## List of muscles/parts supported
 
-Muscle names are plain strings, typed as the `Muscle` union. The `MUSCLES` array exports every name, and
-`MODEL_TYPES` exports `anterior` and `posterior`.
-
 ```
 /* Back */
 trapezius
@@ -95,14 +92,11 @@ obliques
 
 /* Legs */
 adductor
-abductors
 hamstring
 quadriceps
+abductors
 calves
 gluteal
-knees
-left-soleus
-right-soleus
 
 /* Head */
 head

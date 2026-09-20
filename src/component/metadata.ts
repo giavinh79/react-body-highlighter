@@ -1,37 +1,43 @@
 import type { CSSProperties } from 'react';
 
-/** Every muscle the model can highlight. Loop over this instead of listing muscles by hand. */
-export const MUSCLES = [
-  'trapezius',
-  'upper-back',
-  'lower-back',
-  'chest',
-  'biceps',
-  'triceps',
-  'forearm',
-  'back-deltoids',
-  'front-deltoids',
-  'abs',
-  'obliques',
-  'adductor',
-  'abductors',
-  'hamstring',
-  'quadriceps',
-  'calves',
-  'gluteal',
-  'head',
-  'neck',
-  'knees',
-  'left-soleus',
-  'right-soleus',
-] as const;
+export const MuscleType = {
+  TRAPEZIUS: 'trapezius',
+  UPPER_BACK: 'upper-back',
+  LOWER_BACK: 'lower-back',
+  CHEST: 'chest',
+  BICEPS: 'biceps',
+  TRICEPS: 'triceps',
+  FOREARM: 'forearm',
+  BACK_DELTOIDS: 'back-deltoids',
+  FRONT_DELTOIDS: 'front-deltoids',
+  ABS: 'abs',
+  OBLIQUES: 'obliques',
+  ADDUCTOR: 'adductor',
+  /** @deprecated Use `ADDUCTOR`. The value has always been `'adductor'`. */
+  ABDUCTOR: 'adductor',
+  ABDUCTORS: 'abductors',
+  HAMSTRING: 'hamstring',
+  QUADRICEPS: 'quadriceps',
+  CALVES: 'calves',
+  GLUTEAL: 'gluteal',
+  HEAD: 'head',
+  NECK: 'neck',
+  KNEES: 'knees',
+  LEFT_SOLEUS: 'left-soleus',
+  RIGHT_SOLEUS: 'right-soleus',
+} as const;
 
-export type Muscle = (typeof MUSCLES)[number];
+export type Muscle = (typeof MuscleType)[keyof typeof MuscleType];
 
-/** The views of the body the model can draw. */
-export const MODEL_TYPES = ['anterior', 'posterior'] as const;
+/** Every muscle name once, in `MuscleType` order. Loop over this instead of listing muscles by hand. */
+export const MUSCLES: readonly Muscle[] = [...new Set(Object.values(MuscleType))];
 
-export type ModelType = (typeof MODEL_TYPES)[number];
+export const ModelType = {
+  POSTERIOR: 'posterior',
+  ANTERIOR: 'anterior',
+} as const;
+
+export type ModelType = (typeof ModelType)[keyof typeof ModelType];
 
 export interface Exercise {
   name: string;

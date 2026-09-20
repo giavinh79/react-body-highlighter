@@ -3,7 +3,7 @@ import { type ComponentProps, useCallback, useState } from 'react';
 import { expect, fn, userEvent, within } from 'storybook/test';
 
 import Model from './Model';
-import { type Exercise, MODEL_TYPES, type MuscleStats } from './metadata';
+import type { Exercise, MuscleStats } from './metadata';
 
 const workout: Exercise[] = [
   { name: 'Bench Press', muscles: ['chest', 'triceps', 'front-deltoids'] },
@@ -22,7 +22,7 @@ const meta = {
     style: { width: '16rem' },
   },
   argTypes: {
-    type: { control: 'radio', options: [...MODEL_TYPES] },
+    type: { control: 'radio', options: ['anterior', 'posterior'] },
     bodyColor: { control: 'color' },
   },
 } satisfies Meta<typeof Model>;

@@ -1,5 +1,4 @@
-import type { MuscleShape } from '../assets';
-import { type Exercise, type Muscle, type MuscleData, MUSCLES } from '../component/metadata';
+import { type Exercise, type Muscle, type MuscleData, MUSCLES, MuscleType } from '../component/metadata';
 
 const MUSCLE_SET: ReadonlySet<string> = new Set(MUSCLES);
 
@@ -46,7 +45,13 @@ export const fillMuscleData = (data: Exercise[]): MuscleDataMap =>
 const ROW_BAND = 25;
 
 /** Muscles drawn beside the body rather than down the middle of it. */
-const ARM_MUSCLES: ReadonlySet<Muscle> = new Set(['front-deltoids', 'back-deltoids', 'biceps', 'triceps', 'forearm']);
+const ARM_MUSCLES: ReadonlySet<Muscle> = new Set([
+  MuscleType.FRONT_DELTOIDS,
+  MuscleType.BACK_DELTOIDS,
+  MuscleType.BICEPS,
+  MuscleType.TRICEPS,
+  MuscleType.FOREARM,
+]);
 
 interface Bounds {
   x: number;
@@ -126,7 +131,7 @@ const acrossFrom = (others: number[], bounds: Bounds[], from: Bounds): number | 
  * column top to bottom and wrap at its ends, so descending the torso never detours through an arm.
  * Left and Right cross to the muscle the current one is level with in the other column.
  */
-export const muscleNavigation = (model: readonly MuscleShape[]): MuscleNavigation[] => {
+export const muscleNavigation = (model: readonly { muscle: Muscle; svgPoints: string[] }[]): MuscleNavigation[] => {
   const bounds = model.map(boundsOf);
   const columns: number[][] = [[], []];
   model.forEach(({ muscle }, index) => {

@@ -3,7 +3,7 @@ import { type KeyboardEvent, memo, useMemo, useRef, useState } from 'react';
 import { anteriorData, posteriorData } from '../assets';
 import { DEFAULT_BODY_COLOR, DEFAULT_HIGHLIGHTED_COLORS, DEFAULT_MODEL_TYPE } from '../constants';
 import { emptyMuscleData, fillIntensityColor, fillMuscleData, muscleNavigation } from '../utils';
-import type { Exercise, ModelProps, Muscle } from './metadata';
+import { type Exercise, type ModelProps, ModelType, type Muscle } from './metadata';
 
 const NO_DATA: Exercise[] = [];
 
@@ -17,8 +17,8 @@ const FOCUS_STYLE = `
 `;
 
 const MODELS = {
-  anterior: { shapes: anteriorData, navigation: muscleNavigation(anteriorData) },
-  posterior: { shapes: posteriorData, navigation: muscleNavigation(posteriorData) },
+  [ModelType.ANTERIOR]: { shapes: anteriorData, navigation: muscleNavigation(anteriorData) },
+  [ModelType.POSTERIOR]: { shapes: posteriorData, navigation: muscleNavigation(posteriorData) },
 };
 
 /**

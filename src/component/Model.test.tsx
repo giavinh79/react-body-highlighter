@@ -1,7 +1,7 @@
 import { describe, expect, it, rs } from '@rstest/core';
 import { fireEvent, render } from '@testing-library/react';
 
-import Model, { type Exercise, type ModelType, type MuscleStats } from '../index';
+import Model, { type Exercise, type MuscleStats, type ModelType } from '../index';
 
 const data: Exercise[] = [
   { name: 'Bench Press', muscles: ['chest', 'triceps', 'front-deltoids'] },

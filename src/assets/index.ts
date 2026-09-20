@@ -1,18 +1,17 @@
-import type { Muscle } from '../component/metadata';
-
-export interface MuscleShape {
+import { type Muscle, MuscleType } from '../component/metadata';
+interface MuscleShape {
   muscle: Muscle;
   svgPoints: string[];
 }
 
 export const anteriorData: MuscleShape[] = [
   {
-    muscle: 'chest',
+    muscle: MuscleType.CHEST,
     svgPoints: ['518 416 510 551 580 580 678 555 706 473 620 416', '298 465 314 555 408 580 482 551 478 420 376 420'],
   },
 
   {
-    muscle: 'obliques',
+    muscle: MuscleType.OBLIQUES,
     svgPoints: [
       '686 633 673 571 588 596 600 641 604 833 657 788 665 698',
       '339 784 331 718 310 633 322 571 408 592 392 633 392 837',
@@ -20,7 +19,7 @@ export const anteriorData: MuscleShape[] = [
   },
 
   {
-    muscle: 'abs',
+    muscle: MuscleType.ABS,
     svgPoints: [
       '563 592 580 641 584 780 584 927 563 984 551 1041 514 1078 510 845 506 673 510 571',
       '437 588 486 571 490 673 486 845 482 1073 445 1037 408 914 408 784 412 645',
@@ -28,17 +27,17 @@ export const anteriorData: MuscleShape[] = [
   },
 
   {
-    muscle: 'biceps',
+    muscle: MuscleType.BICEPS,
     svgPoints: ['167 682 180 714 229 661 290 539 278 494 204 559', '714 494 702 547 763 661 816 718 829 690 788 555'],
   },
 
   {
-    muscle: 'triceps',
+    muscle: MuscleType.TRICEPS,
     svgPoints: ['694 555 694 616 759 727 776 702 755 673', '224 694 298 555 298 608 229 731'],
   },
 
   {
-    muscle: 'neck',
+    muscle: MuscleType.NECK,
     svgPoints: [
       '555 237 506 335 506 392 616 400 706 449 694 367 633 351 584 306',
       '290 449 302 371 363 351 412 302 445 245 490 339 486 392 380 396',
@@ -46,7 +45,7 @@ export const anteriorData: MuscleShape[] = [
   },
 
   {
-    muscle: 'front-deltoids',
+    muscle: MuscleType.FRONT_DELTOIDS,
     svgPoints: [
       '784 531 796 478 792 412 759 380 710 363 722 429 714 473',
       '282 473 212 531 200 478 204 408 245 371 286 371 269 433',
@@ -54,12 +53,12 @@ export const anteriorData: MuscleShape[] = [
   },
 
   {
-    muscle: 'head',
+    muscle: MuscleType.HEAD,
     svgPoints: ['424 29 400 118 420 196 461 233 498 253 547 224 576 192 592 102 571 24 498 0'],
   },
 
   {
-    muscle: 'abductors',
+    muscle: MuscleType.ABDUCTORS,
     svgPoints: [
       '527 1102 543 1249 600 1102 620 1000 649 943 600 927 567 1045',
       '478 1106 449 1253 420 1159 404 1131 396 1073 380 1024 347 939 396 922 416 992 437 1053',
@@ -67,7 +66,7 @@ export const anteriorData: MuscleShape[] = [
   },
 
   {
-    muscle: 'quadriceps',
+    muscle: MuscleType.QUADRICEPS,
     svgPoints: [
       '347 988 371 1082 371 1278 343 1371 310 1327 294 1200 282 1114 294 1008 322 947',
       '633 1057 645 1000 669 947 702 1012 710 1118 682 1331 653 1376 624 1286 620 1114',
@@ -79,7 +78,7 @@ export const anteriorData: MuscleShape[] = [
   },
 
   {
-    muscle: 'knees',
+    muscle: MuscleType.KNEES,
     svgPoints: [
       '339 1400 347 1433 355 1473 363 1510 351 1567 298 1567 273 1527 273 1473 302 1441',
       '657 1400 722 1478 722 1522 698 1571 649 1567 629 1510',
@@ -87,7 +86,7 @@ export const anteriorData: MuscleShape[] = [
   },
 
   {
-    muscle: 'calves',
+    muscle: MuscleType.CALVES,
     svgPoints: [
       '714 1604 735 1535 767 1612 796 1678 784 1878 796 1955 747 1955',
       '249 1947 278 1649 282 1604 261 1543 249 1576 224 1616 208 1678 220 1882 208 1955',
@@ -97,7 +96,7 @@ export const anteriorData: MuscleShape[] = [
   },
 
   {
-    muscle: 'forearm',
+    muscle: MuscleType.FOREARM,
     svgPoints: [
       '61 886 102 751 147 702 163 743 192 735 45 976 0 1000',
       '845 698 833 735 800 731 951 984 1000 1004 935 894 898 763',
@@ -109,12 +108,12 @@ export const anteriorData: MuscleShape[] = [
 
 export const posteriorData: MuscleShape[] = [
   {
-    muscle: 'head',
+    muscle: MuscleType.HEAD,
     svgPoints: ['506 0 460 9 409 55 404 128 451 200 557 200 591 136 596 47 557 13'],
   },
 
   {
-    muscle: 'trapezius',
+    muscle: MuscleType.TRAPEZIUS,
     svgPoints: [
       '447 217 477 217 472 383 477 647 383 532 353 409 311 366 391 332 438 272',
       '523 217 557 217 566 272 609 328 689 366 647 404 617 532 523 647 532 383',
@@ -122,12 +121,12 @@ export const posteriorData: MuscleShape[] = [
   },
 
   {
-    muscle: 'back-deltoids',
+    muscle: MuscleType.BACK_DELTOIDS,
     svgPoints: ['294 370 230 391 174 443 183 536 243 494 272 464', '711 370 783 396 826 447 817 536 749 489 723 451'],
   },
 
   {
-    muscle: 'upper-back',
+    muscle: MuscleType.UPPER_BACK,
     svgPoints: [
       '311 387 281 489 285 553 340 753 472 711 472 664 366 540 336 413',
       '689 387 719 494 715 562 660 753 528 711 528 664 634 545 664 417',
@@ -135,7 +134,7 @@ export const posteriorData: MuscleShape[] = [
   },
 
   {
-    muscle: 'triceps',
+    muscle: MuscleType.TRICEPS,
     svgPoints: [
       '268 498 179 557 145 723 166 817 217 638 268 557',
       '736 502 821 557 860 732 834 821 779 630 732 557',
@@ -145,12 +144,12 @@ export const posteriorData: MuscleShape[] = [
   },
 
   {
-    muscle: 'lower-back',
+    muscle: MuscleType.LOWER_BACK,
     svgPoints: ['477 728 345 770 353 834 494 1021 468 830', '523 728 655 770 647 834 506 1021 532 838'],
   },
 
   {
-    muscle: 'forearm',
+    muscle: MuscleType.FOREARM,
     svgPoints: [
       '864 757 911 834 932 940 1000 1064 962 1043 881 894 843 838',
       '136 757 89 838 68 936 0 1064 38 1043 123 885 157 830',
@@ -160,7 +159,7 @@ export const posteriorData: MuscleShape[] = [
   },
 
   {
-    muscle: 'gluteal',
+    muscle: MuscleType.GLUTEAL,
     svgPoints: [
       '447 996 302 1085 298 1187 315 1260 472 1213 494 1149',
       '553 991 511 1145 523 1209 681 1260 698 1191 694 1085',
@@ -168,7 +167,7 @@ export const posteriorData: MuscleShape[] = [
   },
 
   {
-    muscle: 'adductor',
+    muscle: MuscleType.ADDUCTOR,
     svgPoints: [
       '481 1230 447 1230 413 1255 451 1443 485 1357 489 1294',
       '519 1226 557 1234 591 1260 549 1443 519 1362 511 1294',
@@ -176,7 +175,7 @@ export const posteriorData: MuscleShape[] = [
   },
 
   {
-    muscle: 'hamstring',
+    muscle: MuscleType.HAMSTRING,
     svgPoints: [
       '289 1221 311 1294 366 1260 353 1353 345 1502 294 1583 289 1468 277 1413 272 1315',
       '715 1217 694 1289 638 1260 655 1366 664 1502 711 1583 715 1477 728 1421 736 1319',
@@ -186,12 +185,12 @@ export const posteriorData: MuscleShape[] = [
   },
 
   {
-    muscle: 'knees',
+    muscle: MuscleType.KNEES,
     svgPoints: ['345 1532 311 1591 336 1664 374 1626', '664 1536 630 1630 668 1664 694 1591'],
   },
 
   {
-    muscle: 'calves',
+    muscle: MuscleType.CALVES,
     svgPoints: [
       '294 1604 285 1672 247 1796 238 1928 255 1970 285 1932 298 1800 319 1711 319 1668',
       '374 1651 353 1677 332 1719 311 1804 302 1919 340 2000 387 1906 391 1689',
@@ -201,11 +200,11 @@ export const posteriorData: MuscleShape[] = [
   },
 
   {
-    muscle: 'left-soleus',
+    muscle: MuscleType.LEFT_SOLEUS,
     svgPoints: ['285 1957 302 1957 336 2017 306 2200 285 2136 268 1983'],
   },
   {
-    muscle: 'right-soleus',
+    muscle: MuscleType.RIGHT_SOLEUS,
     svgPoints: ['698 1957 719 1957 736 1983 719 2132 702 2196 672 2021'],
   },
 ];
