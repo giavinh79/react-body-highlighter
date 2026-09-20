@@ -1,6 +1,6 @@
 import { describe, expect, it } from '@rstest/core';
 
-import { type IExerciseData, type Muscle, MuscleType } from '../component/metadata';
+import { type Exercise, type Muscle, MuscleType } from '../component/metadata';
 import { fillIntensityColor, fillMuscleData, muscleNavigation } from './index';
 
 describe('fillIntensityColor', () => {
@@ -24,7 +24,7 @@ describe('fillIntensityColor', () => {
 
 describe('fillMuscleData', () => {
   it('returns proper muscle object given data', () => {
-    const input: IExerciseData[] = [
+    const input: Exercise[] = [
       { name: 'bench press', muscles: [MuscleType.CHEST, MuscleType.TRICEPS], frequency: 2 },
       { name: 'bicep curl', muscles: [MuscleType.BICEPS], frequency: 1 },
       { name: 'triceps pulldown', muscles: [MuscleType.TRICEPS], frequency: 3 },
@@ -42,7 +42,7 @@ describe('fillMuscleData', () => {
   });
 
   it('counts an explicit frequency of 0 as nothing', () => {
-    const input: IExerciseData[] = [{ name: 'Plank', muscles: ['abs'], frequency: 0 }];
+    const input: Exercise[] = [{ name: 'Plank', muscles: ['abs'], frequency: 0 }];
 
     expect(fillMuscleData(input)[MuscleType.ABS]).toStrictEqual({ exercises: ['Plank'], frequency: 0 });
   });
@@ -50,7 +50,7 @@ describe('fillMuscleData', () => {
   it('ignores unknown muscle names', () => {
     // Simulates an untyped JavaScript caller.
     // oxlint-disable-next-line typescript/no-unsafe-type-assertion
-    const input = [{ name: 'typo', muscles: ['chest', 'not-a-muscle'] }] as unknown as IExerciseData[];
+    const input = [{ name: 'typo', muscles: ['chest', 'not-a-muscle'] }] as unknown as Exercise[];
 
     expect(() => fillMuscleData(input)).not.toThrow();
     expect(fillMuscleData(input)[MuscleType.CHEST]?.frequency).toBe(1);

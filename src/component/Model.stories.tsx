@@ -3,9 +3,9 @@ import { type ComponentProps, useCallback, useState } from 'react';
 import { expect, fn, userEvent, within } from 'storybook/test';
 
 import Model from './Model';
-import type { IExerciseData, IMuscleStats } from './metadata';
+import type { Exercise, MuscleStats } from './metadata';
 
-const workout: IExerciseData[] = [
+const workout: Exercise[] = [
   { name: 'Bench Press', muscles: ['chest', 'triceps', 'front-deltoids'] },
   { name: 'Push Ups', muscles: ['chest'] },
   { name: 'Tricep Pushdown', muscles: ['triceps'] },
@@ -72,9 +72,9 @@ export const ClickReportsMuscle: Story = {
 };
 
 function ClickReporter({ onClick, ...args }: ComponentProps<typeof Model>) {
-  const [last, setLast] = useState<IMuscleStats>();
+  const [last, setLast] = useState<MuscleStats>();
   const report = useCallback(
-    (stats: IMuscleStats) => {
+    (stats: MuscleStats) => {
       setLast(stats);
       onClick?.(stats);
     },

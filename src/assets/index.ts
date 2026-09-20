@@ -1,10 +1,10 @@
 import { type Muscle, MuscleType } from '../component/metadata';
-interface ISVGModelData {
+interface MuscleShape {
   muscle: Muscle;
   svgPoints: string[];
 }
 
-export const anteriorData: ISVGModelData[] = [
+export const anteriorData: MuscleShape[] = [
   {
     muscle: MuscleType.CHEST,
     svgPoints: ['518 416 510 551 580 580 678 555 706 473 620 416', '298 465 314 555 408 580 482 551 478 420 376 420'],
@@ -106,7 +106,7 @@ export const anteriorData: ISVGModelData[] = [
   },
 ];
 
-export const posteriorData: ISVGModelData[] = [
+export const posteriorData: MuscleShape[] = [
   {
     muscle: MuscleType.HEAD,
     svgPoints: ['506 0 460 9 409 55 404 128 451 200 557 200 591 136 596 47 557 13'],

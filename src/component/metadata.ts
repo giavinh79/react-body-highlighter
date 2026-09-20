@@ -39,27 +39,27 @@ export const ModelType = {
 
 export type ModelType = (typeof ModelType)[keyof typeof ModelType];
 
-export interface IExerciseData {
+export interface Exercise {
   name: string;
   muscles: Muscle[];
   frequency?: number;
 }
 
-export interface IMuscleData {
+export interface MuscleData {
   exercises: string[];
   frequency: number;
 }
 
-export interface IMuscleStats {
+export interface MuscleStats {
   muscle: Muscle;
-  data: IMuscleData;
+  data: MuscleData;
 }
 
-export interface IModelProps {
+export interface ModelProps {
   bodyColor?: string;
-  data?: IExerciseData[];
+  data?: Exercise[];
   highlightedColors?: string[];
-  onClick?: (exercise: IMuscleStats) => void;
+  onClick?: (exercise: MuscleStats) => void;
   style?: CSSProperties;
   svgStyle?: CSSProperties;
   type?: ModelType;

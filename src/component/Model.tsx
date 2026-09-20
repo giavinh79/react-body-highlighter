@@ -3,9 +3,9 @@ import { type KeyboardEvent, memo, useMemo, useRef, useState } from 'react';
 import { anteriorData, posteriorData } from '../assets';
 import { DEFAULT_BODY_COLOR, DEFAULT_HIGHLIGHTED_COLORS, DEFAULT_MODEL_TYPE } from '../constants';
 import { emptyMuscleData, fillIntensityColor, fillMuscleData, muscleNavigation } from '../utils';
-import { type IExerciseData, type IModelProps, ModelType, type Muscle } from './metadata';
+import { type Exercise, type ModelProps, ModelType, type Muscle } from './metadata';
 
-const NO_DATA: IExerciseData[] = [];
+const NO_DATA: Exercise[] = [];
 
 /** `front-deltoids` reads as "front deltoids, button" rather than the id. */
 const readable = (muscle: Muscle) => muscle.replace(/-/g, ' ');
@@ -47,7 +47,7 @@ export default memo(function Model({
   svgStyle,
   style,
   type = DEFAULT_MODEL_TYPE,
-}: IModelProps) {
+}: ModelProps) {
   const muscleData = useMemo(() => fillMuscleData(data), [data]);
   const [focused, setFocused] = useState<number | null>(null);
   const groups = useRef<(SVGGElement | null)[]>([]);

@@ -29,15 +29,15 @@ $ yarn add react-body-highlighter
 
 ```ts
 import React from 'react';
-import Model, { IExerciseData, IMuscleStats } from 'react-body-highlighter';
+import Model, { type Exercise, type MuscleStats } from 'react-body-highlighter';
 
 export default function Component() {
-  const data: IExerciseData[] = [
+  const data: Exercise[] = [
     { name: 'Bench Press', muscles: ['chest', 'triceps', 'front-deltoids'] },
     { name: 'Push Ups', muscles: ['chest'] },
   ];
 
-  const handleClick = React.useCallback(({ muscle, data }: IMuscleStats) => {
+  const handleClick = React.useCallback(({ muscle, data }: MuscleStats) => {
     const { exercises, frequency } = data;
 
     alert(`You clicked the ${muscle}! You've worked out this muscle ${frequency} times through the following exercises: ${JSON.stringify(exercises)}`)

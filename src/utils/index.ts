@@ -1,13 +1,13 @@
-import { type IExerciseData, type IMuscleData, type Muscle, MUSCLES, MuscleType } from '../component/metadata';
+import { type Exercise, type Muscle, type MuscleData, MUSCLES, MuscleType } from '../component/metadata';
 
 const MUSCLE_SET: ReadonlySet<string> = new Set(MUSCLES);
 
 export const isMuscle = (value: string): value is Muscle => MUSCLE_SET.has(value);
 
-export const emptyMuscleData = (): IMuscleData => ({ exercises: [], frequency: 0 });
+export const emptyMuscleData = (): MuscleData => ({ exercises: [], frequency: 0 });
 
 /** Muscles that appear in the exercise data. Muscles without exercises are absent. */
-export type MuscleDataMap = Partial<Record<Muscle, IMuscleData>>;
+export type MuscleDataMap = Partial<Record<Muscle, MuscleData>>;
 
 /**
  * Color for a muscle based on how often it has been exercised, or undefined when it has not been.
@@ -30,7 +30,7 @@ export const fillIntensityColor = (
  * Per-muscle exercise names and total frequency. Unknown muscle names are ignored.
  * An exercise without `frequency` counts once; an explicit `0` adds nothing.
  */
-export const fillMuscleData = (data: IExerciseData[]): MuscleDataMap =>
+export const fillMuscleData = (data: Exercise[]): MuscleDataMap =>
   data.reduce<MuscleDataMap>((acc, exercise) => {
     for (const muscle of exercise.muscles) {
       if (!isMuscle(muscle)) continue;
@@ -61,7 +61,7 @@ interface Bounds {
 }
 
 /** Where each arrow key leads from a muscle, as indices into the model it was built from. */
-export interface IMuscleNavigation {
+export interface MuscleNavigation {
   up: number;
   down: number;
   across: number;
@@ -131,14 +131,14 @@ const acrossFrom = (others: number[], bounds: Bounds[], from: Bounds): number | 
  * column top to bottom and wrap at its ends, so descending the torso never detours through an arm.
  * Left and Right cross to the muscle the current one is level with in the other column.
  */
-export const muscleNavigation = (model: readonly { muscle: Muscle; svgPoints: string[] }[]): IMuscleNavigation[] => {
+export const muscleNavigation = (model: readonly { muscle: Muscle; svgPoints: string[] }[]): MuscleNavigation[] => {
   const bounds = model.map(boundsOf);
   const columns: number[][] = [[], []];
   model.forEach(({ muscle }, index) => {
     columns[ARM_MUSCLES.has(muscle) ? 1 : 0].push(index);
   });
 
-  const navigation: IMuscleNavigation[] = [];
+  const navigation: MuscleNavigation[] = [];
 
   columns
     .map((column) => byHeight(column, bounds))
