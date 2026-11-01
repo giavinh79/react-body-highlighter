@@ -5,6 +5,8 @@ minimumReleaseAge: 2880
 minimumReleaseAgeExclude:
   - '@rslib/core'
   - rsbuild-plugin-dts
+  # Renovate security update: happy-dom@21.0.4
+  - happy-dom@21.0.4
 # Fail if a dependency's trust evidence weakens (trusted publisher -> provenance -> none).
 trustPolicy: no-downgrade
 # semver 5 and 6 predate npm provenance; newer majors have it, which the policy reads as a downgrade.
